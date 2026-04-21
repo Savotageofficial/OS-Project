@@ -18,7 +18,7 @@ public class RR {
 
     }
 
-    public singlewaitingtime(Process p){
+    public singlewaitingtime(process p){
 
     }
 
