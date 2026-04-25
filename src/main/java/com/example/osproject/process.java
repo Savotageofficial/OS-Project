@@ -1,14 +1,16 @@
 package com.example.osproject;
 
-public class process {
-    int pid;
-    int arrivaltime;
-    int bursttime;
-    int remainingtime;
-    int waitingtime;
-    int turnaroundtime;
-    int completiontime;
-    boolean completed;
+    public class process {
+        int pid;
+        int arrivaltime;
+        int bursttime;
+        int remainingtime;
+        int waitingtime;
+        int turnaroundtime;
+        int completiontime;
+        int responsetime;
+        boolean started;
+        boolean completed;
 
 
     public process(int pid ,int arrivaltime , int bursttime) {
