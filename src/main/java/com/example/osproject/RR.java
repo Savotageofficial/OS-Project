@@ -1,50 +1,51 @@
 package com.example.osproject;
+
 import java.util.*;
 
-
 public class RR {
-    int Processcount,quantum;
-    int [] processes;
+    int Processcount, quantum;
+    int[] processes;
 
-
-
-    public static void RR(process[] processes , int q){
+    public static void RR(process[] processes, int q) {
         int n = processes.length;
 
         // See What java gonna compare between objects
-        Arrays.sort(processes , Comparator.comparingInt(p -> p.arrivaltime));
+        Arrays.sort(processes, Comparator.comparingInt(p -> p.arrivaltime));
 
         int time = 0;
         int completed = 0;
 
         Queue<process> ready = new LinkedList<>();
 
-        //check what processes arrived , aka what processes have arrival time = time and add them to arrived
-        for(int i = 0; i < n; i++){
-            if (processes[i].arrivaltime <= time){
+        // check what processes arrived , aka what processes have arrival time = time
+        // and add them to arrived
+        for (int i = 0; i < n; i++) {
+            if (processes[i].arrivaltime <= time) {
                 ready.add(processes[i]);
             }
         }
 
-        while(completed < n) {
+        while (completed < n) {
             while (!(ready.isEmpty())) {
 
                 process p = ready.poll();
-//                Checking the ready
+                // Checking the ready
                 if (p.remainingtime > q) {
-                    //execute the process completely in its time quantum
+                    // execute the process completely in its time quantum
                     p.remainingtime -= q;
                     time += q;
-                    //check what processes arrived , aka what processes have arrival time = time and add them to arrived
+                    // check what processes arrived , aka what processes have arrival time = time
+                    // and add them to arrived
                     for (int i = 0; i < n; i++) {
-                        if (((processes[i].arrivaltime > (time - q)) && (processes[i].arrivaltime <= time)) && (!ready.contains(processes[i])) && (!processes[i].completed)) {
+                        if (((processes[i].arrivaltime > (time - q)) && (processes[i].arrivaltime <= time))
+                                && (!ready.contains(processes[i])) && (!processes[i].completed)) {
                             ready.add(processes[i]);
                         }
                     }
-                    //insert p at the end of the queue
+                    // insert p at the end of the queue
                     ready.add(p);
                 } else if (p.remainingtime <= q) {
-                    //execute p for its remaining time
+                    // execute p for its remaining time
                     time += p.remainingtime;
                     p.completiontime = time;
                     p.turnaroundtime = time - p.arrivaltime;
@@ -53,9 +54,11 @@ public class RR {
                     p.completed = true;
                     completed++;
 
-                    //check what processes arrived , aka what processes have arrival time = time and add them to arrived
+                    // check what processes arrived , aka what processes have arrival time = time
+                    // and add them to arrived
                     for (int i = 0; i < n; i++) {
-                        if (((processes[i].arrivaltime > (time - q)) && (processes[i].arrivaltime <= time)) && (!ready.contains(processes[i])) && (!processes[i].completed)) {
+                        if (((processes[i].arrivaltime > (time - q)) && (processes[i].arrivaltime <= time))
+                                && (!ready.contains(processes[i])) && (!processes[i].completed)) {
                             ready.add(processes[i]);
                         }
                     }
@@ -71,14 +74,13 @@ public class RR {
                     }
                 }
 
-
             }
+        }
+        for (process p : processes) {
+            System.out.println("p" + p.pid + " Completion Time:" + p.completiontime + " Waiting Time:" + p.waitingtime
+                    + " Turnaround Time:" + p.turnaroundtime);
         }
 
     }
 
-
-
-
 }
-
