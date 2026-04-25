@@ -38,6 +38,12 @@ public class SJF {
                 }
             }
             if (idx != -1){
+                // Track response time (first time on CPU)
+                if (!processes[idx].started) {
+                    processes[idx].responsetime = currentTime - processes[idx].arrivaltime;
+                    processes[idx].started = true;
+                }
+
                 processes[idx].remainingtime--;
                 currentTime++;
 
