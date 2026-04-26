@@ -18,6 +18,9 @@ package com.example.osproject;
         this.arrivaltime = arrivaltime;
         this.bursttime = bursttime;
         this.remainingtime = bursttime;
+        this.responsetime = -1;
+        this.started = false;
+        this.completed = false;
     }
 
     public int getBursttime() {
@@ -30,4 +33,5 @@ package com.example.osproject;
 
     public int getWaitingtime() {
         return waitingtime;
-    }}
+    }
+}
