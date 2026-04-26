@@ -10,6 +10,7 @@
   <img src="https://img.shields.io/badge/Ubuntu-E95420?logo=ubuntu&logoColor=white" />
   <img src="https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff" />
   <img src="https://custom-icon-badges.demolab.com/badge/Windows-0078D6?logo=windows11&logoColor=white" />
+  <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff" />
 </p>
 
 ## **Team Members**
