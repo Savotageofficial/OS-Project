@@ -31,6 +31,12 @@ package com.example.osproject;
         started = false;
         completed = false;
     }
+    public process copy(){
+
+        return new process(pid,arrivaltime,bursttime);
+
+    }
+
 
     public int getBursttime() {
         return bursttime;
