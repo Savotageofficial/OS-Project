@@ -12,7 +12,6 @@ package com.example.osproject;
         boolean started;
         boolean completed;
 
-
     public process(int pid ,int arrivaltime , int bursttime) {
         this.pid = pid;
         this.arrivaltime = arrivaltime;
@@ -21,6 +20,16 @@ package com.example.osproject;
         this.responsetime = -1;
         this.started = false;
         this.completed = false;
+    }
+
+    public void reset(){
+        remainingtime = bursttime;
+        waitingtime = 0;
+        turnaroundtime = 0;
+        completiontime = 0;
+        responsetime = -1;
+        started = false;
+        completed = false;
     }
 
     public int getBursttime() {
