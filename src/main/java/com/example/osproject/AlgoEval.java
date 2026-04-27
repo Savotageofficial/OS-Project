@@ -60,9 +60,9 @@ public class AlgoEval {
     public String getComparisonSummary() {
         StringBuilder sb = new StringBuilder();
         sb.append("Metric |  RR  | SRTF" + "\n");
-        sb.append("Avg Waiting Time= " + rrAvgWT + " " + srtfAvgWT + "\n");
-        sb.append("Avg Turnaround Time= " + rrAvgTAT + " " + srtfAvgTAT + "\n");
-        sb.append("Avg Response Time= " + rrAvgRT + " " + srtfAvgRT + "\n");
+        sb.append("Avg Waiting Time= " + rrAvgWT + " | " + srtfAvgWT + "\n");
+        sb.append("Avg Turnaround Time= " + rrAvgTAT + " | " + srtfAvgTAT + "\n");
+        sb.append("Avg Response Time= " + rrAvgRT + " | " + srtfAvgRT + "\n");
         return sb.toString();
     }
 
