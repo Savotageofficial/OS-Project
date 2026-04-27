@@ -33,6 +33,15 @@ package com.example.osproject;
         }
 
         public process copy() {
+<<<<<<< process-class-task
+=======
+            return new process(this.pid, this.arrivaltime, this.bursttime);
+        }
+
+    public int getBursttime() {
+        return bursttime;
+    }
+>>>>>>> dev
 
             return new process(pid, arrivaltime, bursttime);
 
