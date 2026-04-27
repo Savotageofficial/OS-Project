@@ -21,6 +21,10 @@
 
 
 # **Core Features**
+
+## **Acurate comparisons**
+*using average waiting , turnaround , response times to accurately decide which algorithm is favourable
+
 ## **JavaFX User Interface**
 
 
