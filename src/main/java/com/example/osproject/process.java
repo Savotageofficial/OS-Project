@@ -20,6 +20,10 @@ package com.example.osproject;
         this.remainingtime = bursttime;
     }
 
+        public process copy() {
+            return new process(this.pid, this.arrivaltime, this.bursttime);
+        }
+
     public int getBursttime() {
         return bursttime;
     }

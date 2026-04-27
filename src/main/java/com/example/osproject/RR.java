@@ -76,10 +76,8 @@ public class RR {
 
             }
         }
-        for (process p : processes) {
-            System.out.println("p" + p.pid + " Completion Time:" + p.completiontime + " Waiting Time:" + p.waitingtime
-                    + " Turnaround Time:" + p.turnaroundtime);
-        }
+
+
 
     }
 
