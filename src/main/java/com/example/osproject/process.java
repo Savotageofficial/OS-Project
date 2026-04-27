@@ -33,47 +33,42 @@ package com.example.osproject;
         }
 
         public process copy() {
-<<<<<<< process-class-task
-=======
             return new process(this.pid, this.arrivaltime, this.bursttime);
         }
 
     public int getBursttime() {
         return bursttime;
     }
->>>>>>> dev
 
-            return new process(pid, arrivaltime, bursttime);
 
-        }
-        public int pid(){
-            return pid;
-        }
-        public int getArrivaltime(){
-            return arrivaltime;
-
-        }
-        public int getBursttime(){
-            return bursttime;
-        }
-        public int getRemainingtime(){
-            return remainingtime;
-        }
-        public int getWaitingtime(){
-            return waitingtime;
-        }
-        public int getTurnaroundtime(){
-            return turnaroundtime;
-        }
-        public int getResponsetime(){
-            return responsetime;
-        }
-        public int getCompletiontime(){
-            return completiontime;
-        }
-        public boolean isCompleted(){
-            return completed;
-        }
-
+    public int pid(){
+        return pid;
+    }
+    public int getArrivaltime(){
+        return arrivaltime;
 
     }
+    public int getBursttime(){
+        return bursttime;
+    }
+    public int getRemainingtime(){
+        return remainingtime;
+    }
+    public int getWaitingtime(){
+        return waitingtime;
+    }
+    public int getTurnaroundtime(){
+        return turnaroundtime;
+    }
+    public int getResponsetime(){
+        return responsetime;
+    }
+    public int getCompletiontime(){
+        return completiontime;
+    }
+    public boolean isCompleted(){
+        return completed;
+    }
+
+
+}
