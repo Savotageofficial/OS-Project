@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.RRController">
@@ -26,68 +29,34 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <FlowPane layoutX="-1.0" layoutY="30.0" prefHeight="47.0" prefWidth="610.0" />
+            <FlowPane layoutX="-1.0" layoutY="30.0" prefHeight="47.0" prefWidth="610.0">
+               <children>
+                  <HBox prefHeight="46.0" prefWidth="610.0" />
+               </children></FlowPane>
          </children>
       </AnchorPane>
       <AnchorPane layoutY="165.0" prefHeight="236.0" prefWidth="624.0">
          <children>
-            <HBox layoutX="52.0" layoutY="22.0" prefHeight="202.0" prefWidth="520.0">
+            <TableView fx:id="tableView" layoutX="46.0" layoutY="14.0" prefHeight="19.0" prefWidth="530.0">
+              <columns>
+                <TableColumn prefWidth="132.79998779296875" text="process" />
+                  <TableColumn prefWidth="132.79998779296875" text="Waiting Time" />
+                  <TableColumn prefWidth="132.79998779296875" text="Turnaround Time" />
+                  <TableColumn prefWidth="132.79998779296875" text="Response Time" />
+              </columns>
+            </TableView>
+            <HBox depthTest="ENABLE" layoutX="265.0" layoutY="183.0" prefHeight="32.0" prefWidth="310.0" spacing="30.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="89.0" text="Process">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="89.0" text="AT">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="89.0" text="BT">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="89.0" text="Process">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="89.0" text="TAT">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="89.0" text="WT">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
+                  <Label fx:id="avgWT" prefHeight="32.0" prefWidth="89.0" text="AVG WT=" />
+                  <Label fx:id="avgTAT" prefHeight="32.0" prefWidth="89.0" text="AVG TAT=" />
+                  <Label fx:id="avgRT" prefHeight="32.0" prefWidth="89.0" text="AVG RT=" />
                </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </HBox>
          </children>
       </AnchorPane>
