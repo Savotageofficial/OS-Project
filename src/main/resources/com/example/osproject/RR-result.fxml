@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="Anchor1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.RRController">
@@ -17,7 +18,7 @@
                   <Font name="Yu Gothic UI Semilight" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="TypeOfProcess" alignment="CENTER" layoutX="642.0" layoutY="11.0" prefHeight="49.0" prefWidth="40.0" text="RR">
+            <Label fx:id="TypeOfProcess" alignment="CENTER" layoutX="642.0" layoutY="11.0" prefHeight="49.0" prefWidth="40.0" text="RR" AnchorPane.topAnchor="11.0">
                <font>
                   <Font name="Yu Gothic UI Semilight" size="30.0" />
                </font></Label>
@@ -35,20 +36,31 @@
       </AnchorPane>
       <AnchorPane layoutY="229.0" prefHeight="370.0" prefWidth="899.0">
          <children>
-            <TableView fx:id="tableView" layoutX="23.0" layoutY="23.0" prefHeight="282.0" prefWidth="841.0" />
-            <HBox depthTest="ENABLE" layoutX="333.0" layoutY="305.0" prefHeight="32.0" prefWidth="532.0" spacing="110.0">
+            <VBox layoutX="-2.0" prefHeight="370.0" prefWidth="899.0">
                <children>
-                  <Label fx:id="avgWT" prefHeight="32.0" prefWidth="89.0" text="AVG WT=" />
-                  <Label fx:id="avgTAT" prefHeight="32.0" prefWidth="89.0" text="AVG TAT=" />
-                  <Label fx:id="avgRT" prefHeight="32.0" prefWidth="89.0" text="AVG RT=" />
+                  <TableView fx:id="tableView" prefHeight="282.0" prefWidth="841.0" />
+                  <HBox fx:id="avgs" depthTest="ENABLE" prefHeight="32.0" prefWidth="532.0" spacing="130.0">
+                     <children>
+                        <Label fx:id="avgWT" prefHeight="32.0" prefWidth="89.0" text="AVG WT=">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="avgTAT" prefHeight="32.0" prefWidth="89.0" text="AVG TAT=" />
+                        <Label fx:id="avgRT" prefHeight="32.0" prefWidth="89.0" text="AVG RT=" />
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="300.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </HBox>
+            </VBox>
          </children>
       </AnchorPane>
    </children>
