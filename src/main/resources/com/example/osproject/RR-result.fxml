@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -13,12 +14,12 @@
    <children>
       <AnchorPane fx:id="Anchortop" layoutX="86.0" layoutY="46.0" prefHeight="71.0" prefWidth="738.0">
          <children>
-            <Label fx:id="output" layoutX="14.0" layoutY="13.0" text="OUTPUT">
+            <Label fx:id="output" layoutX="14.0" layoutY="13.0" text="OUTPUT:">
                <font>
                   <Font name="Yu Gothic UI Semilight" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="TypeOfProcess" alignment="CENTER" layoutX="642.0" layoutY="11.0" prefHeight="49.0" prefWidth="40.0" text="RR" AnchorPane.topAnchor="11.0">
+            <Label fx:id="TypeOfProcess" alignment="CENTER" layoutX="139.0" layoutY="13.0" prefHeight="40.0" prefWidth="55.0" text="RR" AnchorPane.topAnchor="13.0">
                <font>
                   <Font name="Yu Gothic UI Semilight" size="30.0" />
                </font></Label>
@@ -26,7 +27,10 @@
       </AnchorPane>
       <AnchorPane layoutY="105.0" prefHeight="123.0" prefWidth="899.0">
          <children>
-            <HBox fx:id="ganttBox" layoutX="-2.0" layoutY="34.0" prefHeight="80.0" prefWidth="899.0" />
+            <HBox layoutX="-2.0" layoutY="34.0" prefHeight="80.0" prefWidth="899.0">
+               <children>
+                  <FlowPane fx:id="ganttBox" prefHeight="80.0" prefWidth="900.0" />
+               </children></HBox>
             <Label fx:id="gant" layoutX="418.0" layoutY="14.0" text="Gantt chart">
                <font>
                   <Font name="AGA Arabesque Desktop" size="13.0" />
