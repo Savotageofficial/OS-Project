@@ -3,49 +3,40 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.RRController">
+<AnchorPane fx:id="Anchor1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.RRController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="71.0" prefWidth="610.0">
+      <AnchorPane fx:id="Anchortop" layoutX="114.0" layoutY="46.0" prefHeight="71.0" prefWidth="1296.0">
          <children>
-            <Label layoutX="14.0" layoutY="17.0" text="OUTPUT">
+            <Label fx:id="output" layoutX="14.0" layoutY="20.0" text="OUTPUT">
                <font>
-                  <Font name="Avignon Pro Medium" size="27.0" />
+                  <Font name="Arial Bold" size="27.0" />
                </font>
             </Label>
-            <Label fx:id="TypeOfProcess" layoutX="526.0" layoutY="24.0" text="LLLLL" />
+            <Label fx:id="TypeOfProcess" alignment="CENTER" layoutX="1242.0" layoutY="20.0" prefHeight="32.0" prefWidth="39.0" text="RR">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="4.0" layoutY="74.0" prefHeight="92.0" prefWidth="610.0">
+      <AnchorPane layoutX="97.0" layoutY="139.0" prefHeight="123.0" prefWidth="1318.0">
          <children>
-            <Label layoutX="270.0" layoutY="4.0" text="Gantt chart">
+            <HBox fx:id="ganttBox" layoutX="-1.0" layoutY="40.0" prefHeight="80.0" prefWidth="1318.0" />
+            <Label fx:id="gant" layoutX="627.0" layoutY="14.0" text="Gantt chart">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="AGA Arabesque Desktop" size="13.0" />
                </font>
             </Label>
-            <FlowPane layoutX="-1.0" layoutY="30.0" prefHeight="47.0" prefWidth="610.0">
-               <children>
-                  <HBox prefHeight="46.0" prefWidth="610.0" />
-               </children></FlowPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="165.0" prefHeight="236.0" prefWidth="624.0">
+      <AnchorPane layoutY="269.0" prefHeight="522.0" prefWidth="1326.0">
          <children>
-            <TableView fx:id="tableView" layoutX="46.0" layoutY="14.0" prefHeight="19.0" prefWidth="530.0">
-              <columns>
-                <TableColumn prefWidth="132.79998779296875" text="process" />
-                  <TableColumn prefWidth="132.79998779296875" text="Waiting Time" />
-                  <TableColumn prefWidth="132.79998779296875" text="Turnaround Time" />
-                  <TableColumn prefWidth="132.79998779296875" text="Response Time" />
-              </columns>
-            </TableView>
-            <HBox depthTest="ENABLE" layoutX="265.0" layoutY="183.0" prefHeight="32.0" prefWidth="310.0" spacing="30.0">
+            <TableView fx:id="tableView" layoutX="107.0" layoutY="25.0" prefHeight="282.0" prefWidth="1296.0" />
+            <HBox depthTest="ENABLE" layoutX="767.0" layoutY="390.0" prefHeight="32.0" prefWidth="636.0" spacing="130.0">
                <children>
                   <Label fx:id="avgWT" prefHeight="32.0" prefWidth="89.0" text="AVG WT=" />
                   <Label fx:id="avgTAT" prefHeight="32.0" prefWidth="89.0" text="AVG TAT=" />
