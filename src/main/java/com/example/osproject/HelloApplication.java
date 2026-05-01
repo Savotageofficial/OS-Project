@@ -2,7 +2,10 @@ package com.example.osproject;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,7 +15,21 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("RR-result.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("!!!!!!");
+
+
+        Group root = new Group();
+        Image icon =new Image("OIP.png");
+        stage.getIcons().add(icon);
+        Image imagee= new Image("OIP.png");
+        ImageView imageView= new ImageView(imagee);
+
+
+
+        String css= this.getClass().getResource("RRStyle.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+        stage.setTitle("OS project");
+        root.getChildren().add(imageView);
         stage.setScene(scene);
         stage.show();
     }
