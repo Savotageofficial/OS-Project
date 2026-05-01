@@ -6,15 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.HBox;
-
-import java.util.ArrayList;
+import javafx.scene.layout.FlowPane;
 import java.util.List;
 
 public class RRController {
 
     @FXML
-    private HBox ganttBox;
+    private FlowPane ganttBox;
 
     @FXML
     private TableView<process> tableView;
@@ -25,9 +23,11 @@ public class RRController {
     public void loadData(List<process> processes, int quantum) {
         AlgoEval algoEval = new AlgoEval(processes, quantum);
         process[] rr = algoEval.getRrProcesses();
+        List<process> executionOrder = RR.RR(processes.toArray(new process[0]), quantum);
+
+        Gantt(executionOrder, quantum);
 
         tableView.getItems().addAll(rr);
-
         avgWT.setText("Avg WT: " + algoEval.getRrAvgWT());
         avgTAT.setText("Avg TAT: " + algoEval.getRrAvgTAT());
         avgRT.setText("Avg RT: " + algoEval.getRrAvgRT());
@@ -58,5 +58,17 @@ public class RRController {
 
         tableView.setFixedCellSize(25);
         tableView.prefHeightProperty().bind(tableView.fixedCellSizeProperty().multiply(Bindings.size(tableView.getItems()).add(2)) );
+    }
+
+    private void Gantt(List<process> executionOrder, int quantum) {
+        ganttBox.getChildren().clear();
+
+        for (process p : executionOrder) {
+            Label block = new Label("P" + p.pid());
+            block.setPrefWidth(quantum * 20);
+            block.getStyleClass().add("gantt-block");
+
+            ganttBox.getChildren().add(block);
+        }
     }
 }
