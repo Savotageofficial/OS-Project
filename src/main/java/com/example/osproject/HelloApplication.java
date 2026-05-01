@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -24,14 +26,29 @@ public class HelloApplication extends Application {
         ImageView imageView= new ImageView(imagee);
 
 
-
-        String css= this.getClass().getResource("RRStyle.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        //round robin style path
+        String RRcss= this.getClass().getResource("RRStyle.css").toExternalForm();
+        scene.getStylesheets().add(RRcss);
 
         stage.setTitle("OS project");
         root.getChildren().add(imageView);
         stage.setScene(scene);
         stage.show();
+        //logout
+        stage.setOnCloseRequest(Event ->{
+            Event.consume();
+            logOut(stage);
+        });
+    }
+    public void logOut (Stage stage){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("logout");
+        alert.setHeaderText("you're about logout!");
+        alert.setContentText("do you want to save before exiting?");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            System.out.println("you successfully logged out!");
+            stage.close();
+        }
     }
 
     public static void main(String[] args) {
