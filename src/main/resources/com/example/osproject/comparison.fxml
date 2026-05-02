@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="899" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.ComparisonController">
+    <children>
+        <Button layoutX="403.0" layoutY="315.0" mnemonicParsing="false" text="compare" />
+      <TableView fx:id="table" layoutX="236.0" layoutY="94.25" maxHeight="94.25" maxWidth="380" prefHeight="380" prefWidth="380">
+        <columns>
+          <TableColumn fx:id="met" prefWidth="75.0" text="Matrics" />
+          <TableColumn fx:id="rr" prefWidth="145.19998168945312" text="RR" />
+            <TableColumn fx:id="sjf" prefWidth="139.9999938964844" text="SJF" />
+        </columns>
+      </TableView>
+    </children>
+</AnchorPane>
