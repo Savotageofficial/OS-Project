@@ -21,7 +21,8 @@ public class Main extends Application {
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("input.css").toExternalForm());
         stage.setHeight(600);
-        stage.setWidth(800);
+        stage.setWidth(899);
+        stage.setResizable(false);
         stage.show();
     }
 
