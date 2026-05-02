@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.InputController">
+   <children>
+      <Button layoutX="455.0" layoutY="510.0" mnemonicParsing="false" text="Run RR" />
+      <Button layoutX="547.0" layoutY="510.0" mnemonicParsing="false" text="Run SJF" />
+      <Button layoutX="645.0" layoutY="510.0" mnemonicParsing="false" text="Show Comparision" />
+      <Button layoutX="423.0" layoutY="422.0" mnemonicParsing="false" text="Show Process Table" />
+   </children>
+</AnchorPane>
