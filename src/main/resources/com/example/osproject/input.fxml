@@ -7,7 +7,7 @@
    <children>
       <Button layoutX="607.0" layoutY="510.0" mnemonicParsing="false" onAction="#goToRR" text="Run RR" />
       <Button layoutX="680.0" layoutY="510.0" mnemonicParsing="false" onAction="#goToSJF" text="Run SJF" />
-      <Button layoutX="754.0" layoutY="510.0" mnemonicParsing="false" onAction="#goToComparision" text="Show Comparision" />
+      <Button layoutX="754.0" layoutY="510.0" mnemonicParsing="false" onAction="#goToComparison" text="Show Comparision" />
       <Button layoutX="547.0" layoutY="446.0" mnemonicParsing="false" onAction="#goToProcessTable" text="Show Process Table" />
       <TextField fx:id="pid" layoutX="302.0" layoutY="177.0" />
       <TextField fx:id="arrival" layoutX="302.0" layoutY="239.0" />

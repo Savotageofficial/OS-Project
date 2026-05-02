@@ -9,7 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.FlowPane;
 import java.util.List;
 
-public class RRController {
+public class RRController {/*
 
     @FXML
     private FlowPane ganttBox;
@@ -70,5 +70,5 @@ public class RRController {
 
             ganttBox.getChildren().add(block);
         }
-    }
+    }*/
 }

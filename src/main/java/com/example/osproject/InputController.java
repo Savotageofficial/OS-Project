@@ -84,8 +84,8 @@ public class InputController {
     public void goToSJF(ActionEvent e) throws IOException {
         s.switchToSJFScene(e);
     }
-    public void goToComparision(ActionEvent e) throws IOException {
-        s.switchToComparisionScene(e);
+    public void goToComparison(ActionEvent e) throws IOException {
+        s.switchToComparisonScene(e);
     }
     public void goToProcessTable(ActionEvent e) throws IOException {
         s.switchToProcessTableScene(e);
