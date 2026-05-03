@@ -7,6 +7,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.collections.*;
 
+import java.util.List;
+
 public class  SJFController {
     @FXML private TableView<process> table;
     @FXML private TableColumn<process , Integer> pidCol;
@@ -40,27 +42,18 @@ public class  SJFController {
                 ).asObject()
         );
 
-
-
-            // ربط الأعمدة (سيبيه زي ما هو عندك)
-
-            // test data 👇
-            process[] test = {
-                    new process(1, 0, 5),
-                    new process(2, 1, 3),
-                    new process(3, 2, 2)
-            };
-
-            setProcesses(test);
         }
 
-    public void setProcesses(process[] processes){
+    public void setProcesses(List<process> processes){
         runSJF(processes);
     }
-    private void runSJF(process[] arr){
-        if(arr==null||arr.length==0)return;
+    private void runSJF(List<process>processes){
+        if(processes==null||processes.isEmpty())return;
+        process[]arr=processes.toArray(new process[0]);
+
         SJF sjf=new SJF(arr);
         sjf.Run(arr);
+
         process[] result = sjf.getProcesses();
         fillTable(result);
         calculateAverages(result);
