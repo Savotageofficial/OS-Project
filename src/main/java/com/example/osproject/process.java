@@ -33,20 +33,16 @@ package com.example.osproject;
         }
 
         public process copy() {
-<<<<<<< process-class-task
-=======
+
             return new process(this.pid, this.arrivaltime, this.bursttime);
         }
 
-    public int getBursttime() {
-        return bursttime;
-    }
->>>>>>> dev
 
-            return new process(pid, arrivaltime, bursttime);
 
-        }
-        public int pid(){
+
+
+
+        public int getpid(){
             return pid;
         }
         public int getArrivaltime(){
@@ -76,4 +72,17 @@ package com.example.osproject;
         }
 
 
+
+
+
+    @Override
+    public String toString() {
+        return ("p"+getpid()+" AT="+getArrivaltime()+
+                "BT="+getBursttime()+"CT="+getCompletiontime()
+                +"WT="+getWaitingtime()+"TAT="+getTurnaroundtime()+
+                "RT="+getResponsetime());
     }
+    }
+
+
+
