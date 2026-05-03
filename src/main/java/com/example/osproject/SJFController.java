@@ -25,6 +25,19 @@ public class  SJFController {
         pidCol.setCellValueFactory(new PropertyValueFactory<>("turnaroundTime"));
         pidCol.setCellValueFactory(new PropertyValueFactory<>("responseTime"));
     }
+    public void setProcesses(process[] processes){
+        runSJF(processes);
+    }
+    private void runSJF(process[] arr){
+        if(arr==null||arr.length==0)return;
+        SJF sjf=new SJF(arr);
+        sjf.Run(arr);
+        process[] result = sjf.getProcesses();
+        fillTable(result);
+        calculateAverages(result);
+        drawGanttChart(result);
+    }
+
 
 
 
