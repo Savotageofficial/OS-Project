@@ -12,7 +12,7 @@ import java.util.List;
 public class InputController {
 
     @FXML
-    private Label L1,L2,L3,L4;
+    private Label L1,L2,L3,L4,L5,L;
     @FXML
     private TextField pid;
     @FXML
@@ -22,7 +22,6 @@ public class InputController {
     @FXML
     private TextField quantum;
 
-
     List<process> processes = new ArrayList<>();
 
     private void resetError() {
@@ -30,28 +29,28 @@ public class InputController {
         L2.setText("");
         L3.setText("");
         L4.setText("");
+        L5.setText("");
     }
 
     public process createProcess() {
          resetError();
-        int id = Integer.parseInt(pid.getText());
+         try{
+             int id = Integer.parseInt(pid.getText());
         int arr = Integer.parseInt(arrival.getText());
-        int bur = Integer.parseInt(burst.getText());
-        int q = Integer.parseInt(quantum.getText());
         if (arr< 0) {
-            L2.setText("Invalid value");
+            L2.setText("Invalid value in arrival time");
             return null;
         }
-
+        int bur = Integer.parseInt(burst.getText());
         if (bur<= 0) {
-            L3.setText("Invalid value");
-            return null;
-        }
-        if(q<=0){
-            L4.setText("Invalid value");
+            L3.setText("Invalid value in burst time");
             return null;
         }
         return new process(id, arr, bur);
+         }catch (NumberFormatException ex){
+             L5.setText("Please enter valid numbers");
+             return null;
+         }
     }
 
     public void addProcess(ActionEvent e) {
@@ -71,25 +70,38 @@ public class InputController {
         pid.clear();
         arrival.clear();
         burst.clear();
-        quantum.clear();
+
     }
-
-
-
 
     SceneSwitcher s= new SceneSwitcher();
+    int x;
     public void goToRR(ActionEvent e) throws IOException {
+        try{
+        int q = Integer.parseInt(quantum.getText());
+        if(q<=0){
+            L4.setText("Invalid value");
+            return;
+        }
+        x=q;
+        s.setProcesses(processes);
+        s.setQuantum(q);
         s.switchToRRScene(e);
+        }catch (NumberFormatException ex){
+            L4.setText("enter value");
+        }
     }
+
     public void goToSJF(ActionEvent e) throws IOException {
+        s.setProcesses(processes);
         s.switchToSJFScene(e);
     }
     public void goToComparison(ActionEvent e) throws IOException {
+        s.setProcesses(processes);
         s.switchToComparisonScene(e);
     }
     public void goToProcessTable(ActionEvent e) throws IOException {
+        s.setProcesses(processes);
+        s.setQuantum(x);
         s.switchToProcessTableScene(e);
     }
-
-
 }
