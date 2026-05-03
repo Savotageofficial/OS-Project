@@ -3,10 +3,16 @@ package com.example.osproject;
 import java.util.*;
 
 public class RR {
-    int Processcount, quantum;
-    int[] processes;
 
-    public static void Run(process[] processes, int q , HashMap<Integer , Queue> RQs) {
+    private double TotalWaitTime = 0;
+    private double TotalTurnaroundTime = 0;
+    private double TotalResponseTime = 0;
+
+    public void Run(process[] processes, int q , HashMap<Integer , Queue> RQs) {
+        //Reset all the variables for a fresh start
+        TotalWaitTime = 0;
+        TotalResponseTime = 0;
+        TotalTurnaroundTime = 0;
         int n = processes.length;
 
         // See What java gonna compare between objects
@@ -30,6 +36,11 @@ public class RR {
             while (!(ready.isEmpty())) {
 
                 process p = ready.poll();
+                // record first response time if process hasn't started yet
+                if (!p.started) {
+                    p.responsetime = time - p.arrivaltime;
+                    p.started = true;
+                }
                 // Checking the ready
                 if (p.remainingtime > q) {
                     // execute the process completely in its time quantum
@@ -82,7 +93,11 @@ public class RR {
         }
         for (process p : processes) {
             System.out.println("p" + p.pid + " Completion Time:" + p.completiontime + " Waiting Time:" + p.waitingtime
-                    + " Turnaround Time:" + p.turnaroundtime);
+                    + " Turnaround Time:" + p.turnaroundtime + " Response time:" + p.responsetime);
+            TotalTurnaroundTime += p.turnaroundtime;
+            TotalWaitTime += p.waitingtime;
+            TotalResponseTime += p.responsetime;
+
         }
 
     }
