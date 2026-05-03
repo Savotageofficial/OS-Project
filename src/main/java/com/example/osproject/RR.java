@@ -3,10 +3,16 @@ package com.example.osproject;
 import java.util.*;
 
 public class RR {
-    int Processcount, quantum;
-    int[] processes;
 
-    public static void RR(process[] processes, int q) {
+    private double TotalWaitTime = 0;
+    private double TotalTurnaroundTime = 0;
+    private double TotalResponseTime = 0;
+
+    public void Run(process[] processes, int q , HashMap<Integer , Queue> RQs) {
+        //Reset all the variables for a fresh start
+        TotalWaitTime = 0;
+        TotalResponseTime = 0;
+        TotalTurnaroundTime = 0;
         int n = processes.length;
 
         // See What java gonna compare between objects
@@ -24,11 +30,17 @@ public class RR {
                 ready.add(processes[i]);
             }
         }
+        RQs.put(time , ready);
 
         while (completed < n) {
             while (!(ready.isEmpty())) {
 
                 process p = ready.poll();
+                // record first response time if process hasn't started yet
+                if (!p.started) {
+                    p.responsetime = time - p.arrivaltime;
+                    p.started = true;
+                }
                 // Checking the ready
                 if (p.remainingtime > q) {
                     // execute the process completely in its time quantum
@@ -44,6 +56,7 @@ public class RR {
                     }
                     // insert p at the end of the queue
                     ready.add(p);
+                    RQs.put(time , ready);
                 } else if (p.remainingtime <= q) {
                     // execute p for its remaining time
                     time += p.remainingtime;
@@ -62,6 +75,7 @@ public class RR {
                             ready.add(processes[i]);
                         }
                     }
+                    RQs.put(time , ready);
 
                 }
             }
@@ -73,11 +87,18 @@ public class RR {
                         ready.add(processes[i]);
                     }
                 }
+                RQs.put(time , ready);
 
             }
         }
+        for (process p : processes) {
+            System.out.println("p" + p.pid + " Completion Time:" + p.completiontime + " Waiting Time:" + p.waitingtime
+                    + " Turnaround Time:" + p.turnaroundtime + " Response time:" + p.responsetime);
+            TotalTurnaroundTime += p.turnaroundtime;
+            TotalWaitTime += p.waitingtime;
+            TotalResponseTime += p.responsetime;
 
-
+        }
 
     }
 
