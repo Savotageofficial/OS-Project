@@ -6,7 +6,7 @@ public class RR {
     int Processcount, quantum;
     int[] processes;
 
-    public static void RR(process[] processes, int q) {
+    public static void Run(process[] processes, int q , HashMap<Integer , Queue> RQs) {
         int n = processes.length;
 
         // See What java gonna compare between objects
@@ -24,6 +24,7 @@ public class RR {
                 ready.add(processes[i]);
             }
         }
+        RQs.put(time , ready);
 
         while (completed < n) {
             while (!(ready.isEmpty())) {
@@ -44,6 +45,7 @@ public class RR {
                     }
                     // insert p at the end of the queue
                     ready.add(p);
+                    RQs.put(time , ready);
                 } else if (p.remainingtime <= q) {
                     // execute p for its remaining time
                     time += p.remainingtime;
@@ -62,6 +64,7 @@ public class RR {
                             ready.add(processes[i]);
                         }
                     }
+                    RQs.put(time , ready);
 
                 }
             }
@@ -73,6 +76,7 @@ public class RR {
                         ready.add(processes[i]);
                     }
                 }
+                RQs.put(time , ready);
 
             }
         }
