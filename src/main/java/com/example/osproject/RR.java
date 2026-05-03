@@ -7,6 +7,7 @@ public class RR {
     private double TotalWaitTime = 0;
     private double TotalTurnaroundTime = 0;
     private double TotalResponseTime = 0;
+    static List <process> executionOrder = new ArrayList<>();
 
     public void Run(process[] processes, int q , HashMap<Integer , Queue> RQs) {
         //Reset all the variables for a fresh start
@@ -45,6 +46,7 @@ public class RR {
                 if (p.remainingtime > q) {
                     // execute the process completely in its time quantum
                     p.remainingtime -= q;
+                    executionOrder.add(p);
                     time += q;
                     // check what processes arrived , aka what processes have arrival time = time
                     // and add them to arrived
@@ -65,6 +67,7 @@ public class RR {
                     p.waitingtime = p.turnaroundtime - p.bursttime;
                     p.remainingtime = 0;
                     p.completed = true;
+                    executionOrder.add(p);
                     completed++;
 
                     // check what processes arrived , aka what processes have arrival time = time
