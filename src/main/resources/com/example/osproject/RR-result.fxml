@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Anchor1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.RRController">
+   <children>
+      <AnchorPane fx:id="Anchortop" layoutX="86.0" layoutY="46.0" prefHeight="71.0" prefWidth="738.0">
+         <children>
+            <Label fx:id="output" layoutX="14.0" layoutY="13.0" text="OUTPUT:">
+               <font>
+                  <Font name="Yu Gothic UI Semilight" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="TypeOfProcess" alignment="CENTER" layoutX="139.0" layoutY="13.0" prefHeight="40.0" prefWidth="55.0" text="RR" AnchorPane.topAnchor="13.0">
+               <font>
+                  <Font name="Yu Gothic UI Semilight" size="30.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="105.0" prefHeight="123.0" prefWidth="899.0">
+         <children>
+            <HBox layoutX="-2.0" layoutY="34.0" prefHeight="80.0" prefWidth="899.0">
+               <children>
+                  <FlowPane fx:id="ganttBox" prefHeight="80.0" prefWidth="900.0" />
+               </children></HBox>
+            <Label fx:id="gant" layoutX="418.0" layoutY="14.0" text="Gantt chart">
+               <font>
+                  <Font name="AGA Arabesque Desktop" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="229.0" prefHeight="370.0" prefWidth="899.0">
+         <children>
+            <VBox layoutX="-2.0" prefHeight="370.0" prefWidth="899.0">
+               <children>
+                  <TableView fx:id="tableView" prefHeight="282.0" prefWidth="841.0" />
+                  <HBox fx:id="avgs" depthTest="ENABLE" prefHeight="32.0" prefWidth="532.0" spacing="130.0">
+                     <children>
+                        <Label fx:id="avgWT" prefHeight="32.0" prefWidth="89.0" text="AVG WT=">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="avgTAT" prefHeight="32.0" prefWidth="89.0" text="AVG TAT=" />
+                        <Label fx:id="avgRT" prefHeight="32.0" prefWidth="89.0" text="AVG RT=" />
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="300.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

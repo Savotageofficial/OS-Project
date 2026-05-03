@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.InputController">
+   <children>
+      <Button layoutX="607.0" layoutY="510.0" mnemonicParsing="false" onAction="#goToRR" text="Run RR" />
+      <Button layoutX="680.0" layoutY="510.0" mnemonicParsing="false" onAction="#goToSJF" text="Run SJF" />
+      <Button layoutX="754.0" layoutY="510.0" mnemonicParsing="false" onAction="#goToComparison" text="Show Comparison" />
+      <Button layoutX="547.0" layoutY="446.0" mnemonicParsing="false" onAction="#goToProcessTable" text="Show Process Table" />
+      <Label fx:id="id" layoutX="302.0" layoutY="177.0" text="1" />
+      <TextField fx:id="arrival" layoutX="302.0" layoutY="239.0" />
+      <TextField fx:id="burst" layoutX="302.0" layoutY="309.0" />
+      <TextField fx:id="quantum" layoutX="302.0" layoutY="365.0"  />
+      <Label layoutX="302.0" layoutY="147.0" text="process ID" />
+      <Label layoutX="302.0" layoutY="213.0" text="Arrival Time" />
+      <Label layoutX="302.0" layoutY="279.0" text="Burst Time" />
+      <Label fx:id="L" layoutX="302.0" layoutY="345.0" text="Quantum"  />
+      <Button layoutX="460.0" layoutY="409.0" mnemonicParsing="false" onAction="#addProcess" text="add" />
+      <Label layoutX="302.0" layoutY="205.0" />
+      <Label fx:id="L1" layoutX="302.0" layoutY="197.0" />
+      <Label fx:id="L2" layoutX="302.0" layoutY="256.0" />
+      <Label fx:id="L3" layoutX="302.0" layoutY="326.0" />
+      <Label fx:id="L4" layoutX="313.0" layoutY="401.0" />
+      <Label fx:id="L5" layoutX="291.0" layoutY="419.0" prefHeight="18.0" prefWidth="77.0" />
+   </children>
+</AnchorPane>

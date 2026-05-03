@@ -62,8 +62,8 @@ public class SJF {
             total_waiting_time += p.waitingtime;
             total_turnaround_time += p.turnaroundtime;
 
-            // use this for the actual table ↓↓↓
-            System.out.println("p" + p.pid + " Completion Time:" + p.completiontime + " Waiting Time:" + p.waitingtime + " Turnaround Time:" + p.turnaroundtime);
+
+
         }
 
         this.TotalWaitTime = total_waiting_time;
