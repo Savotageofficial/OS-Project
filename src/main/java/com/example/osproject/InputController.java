@@ -12,9 +12,11 @@ import java.util.List;
 public class InputController {
 
     @FXML
-    private Label L1,L2,L3,L4,L5,L;
+    private Label L2,L3,L4,L5,L;
     @FXML
-    private TextField pid;
+    private int pid = 1;
+    @FXML
+    private Label id;
     @FXML
     private TextField arrival;
     @FXML
@@ -25,7 +27,6 @@ public class InputController {
     List<process> processes = new ArrayList<>();
 
     private void resetError() {
-        L1.setText("");
         L2.setText("");
         L3.setText("");
         L4.setText("");
@@ -35,7 +36,8 @@ public class InputController {
     public process createProcess() {
          resetError();
          try{
-             int id = Integer.parseInt(pid.getText());
+             pid++;
+             int id = pid;
         int arr = Integer.parseInt(arrival.getText());
         if (arr< 0) {
             L2.setText("Invalid value in arrival time");
@@ -56,18 +58,13 @@ public class InputController {
     public void addProcess(ActionEvent e) {
         resetError();
         process p = createProcess();
+        id.setText(String.valueOf(pid));
 
         if (p == null) return;
 
-        for (process x : processes) {
-            if (x.pid() == p.pid()) {
-                L1.setText("ID already exists");
-                return;
-            }
-        }
+
         processes.add(p);
         System.out.println("Added process: " + p.pid());
-        pid.clear();
         arrival.clear();
         burst.clear();
 
