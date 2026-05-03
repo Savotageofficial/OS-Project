@@ -20,7 +20,9 @@ public class AlgoEval {
         srtfProcesses = copyList(originalProcesses);
 
         // Run both algorithms using the existing classes
-        RR.RR(rrProcesses, quantum);
+        RR RR = new RR();
+        HashMap<Integer , Queue> rqs = new HashMap<>();
+        RR.Run(rrProcesses, quantum , rqs);
         SJF sjf = new SJF(srtfProcesses);
         sjf.Run(srtfProcesses);
 
