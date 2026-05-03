@@ -19,12 +19,41 @@ public class  SJFController {
     @FXML private Label avgWT;
     @FXML private Label avgTAT;
     @FXML private Label avgRT;
-    @FXML public void initialize(){
-        pidCol.setCellValueFactory(new PropertyValueFactory<>("pid"));
-        pidCol.setCellValueFactory(new PropertyValueFactory<>("waitingTime"));
-        pidCol.setCellValueFactory(new PropertyValueFactory<>("turnaroundTime"));
-        pidCol.setCellValueFactory(new PropertyValueFactory<>("responseTime"));
-    }
+    @FXML public void initialize() {
+        pidCol.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty(
+                        cellData.getValue().pid()
+                ).asObject() );
+        wtCol.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty(
+                        cellData.getValue().getWaitingtime()
+                ).asObject()
+        );
+        tatCol.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty(
+                        cellData.getValue().getTurnaroundtime()
+                ).asObject()
+        );
+        rtCol.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty(
+                        cellData.getValue().getResponsetime()
+                ).asObject()
+        );
+
+
+
+            // ربط الأعمدة (سيبيه زي ما هو عندك)
+
+            // test data 👇
+            process[] test = {
+                    new process(1, 0, 5),
+                    new process(2, 1, 3),
+                    new process(3, 2, 2)
+            };
+
+            setProcesses(test);
+        }
+
     public void setProcesses(process[] processes){
         runSJF(processes);
     }
@@ -37,14 +66,43 @@ public class  SJFController {
         calculateAverages(result);
         drawGanttChart(result);
     }
+private void fillTable(process[]processes){
+        ObservableList<process>data =FXCollections.observableArrayList();
+     for (process p:processes)  {
+         data.add(p);}
+     table.setItems(data);
 
+     table.setFixedCellSize(30);
+     table.prefHeightProperty().bind(
+             table.fixedCellSizeProperty().multiply(
+                     javafx.beans.binding.Bindings.size(table.getItems()).add(1)
+             ));
 
+    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);}
 
+     private void calculateAverages(process[]processes) {
+         double totalWT = 0;
+         double totalTAT = 0;
+         double totalRT = 0;
+         for (process p : processes) {
+             totalWT += p.getWaitingtime();
+             totalTAT += p.getTurnaroundtime();
+             totalRT += p.getResponsetime();
+         }
+         int n = processes.length;
+         avgWT.setText("Average WT= " + totalWT + "/" + n + "=" + (totalWT / n));
+         avgTAT.setText("Average TAT= " + totalTAT + "/" + n + "=" + (totalTAT / n));
+         avgRT.setText("Average RT= " + totalRT + "/" + n + "=" + (totalRT / n));
+     }
+     private void drawGanttChart(process[] processes){
 
-
-
-
-
+        ganttBox.getChildren().clear();
+        for (process p:processes){
+            Label block =new Label("p"+p.pid());
+            block.getStyleClass().add("gantt-block");
+            ganttBox.getChildren().add(block);
+        }
+     }
 }
 
 
