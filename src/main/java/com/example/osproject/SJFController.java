@@ -52,7 +52,7 @@ public class  SJFController {
         process[]arr=processes.toArray(new process[0]);
 
         SJF sjf=new SJF(arr);
-        sjf.Run(arr);
+        sjf.Run();
 
         process[] result = sjf.getProcesses();
         fillTable(result);

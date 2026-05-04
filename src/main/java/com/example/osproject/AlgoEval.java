@@ -24,7 +24,7 @@ public class AlgoEval {
         HashMap<Integer , Queue> rqs = new HashMap<>();
         RR.Run(rrProcesses, quantum , rqs);
         SJF sjf = new SJF(srtfProcesses);
-        sjf.Run(srtfProcesses);
+        sjf.Run();
 
         // Calculate averages
         rrAvgWT = avgWT(rrProcesses);
