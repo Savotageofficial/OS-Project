@@ -39,6 +39,10 @@ public class process {
     public int pid(){
         return pid;
     }
+
+    public int getPid() {
+        return pid;
+    }
     public int getArrivaltime(){
         return arrivaltime;
 
