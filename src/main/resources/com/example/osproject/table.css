@@ -1,0 +1,86 @@
+.root{
+    -fx-background-color: linear-gradient(#0b2322, #323838);
+}
+
+
+.table-view{
+    -fx-background-color: linear-gradient(#0b2322 0%, #323838 100%);
+    -fx-background-radius: 7px;
+    -fx-border-color: #328878;
+    -fx-border-radius: 7px;
+    -fx-border-width: 1px;
+}
+
+
+.table-view .column-header-background{
+    -fx-background-color: #328878;
+    -fx-border-width: 1px;
+    -fx-border-color: transparent transparent #10e8b5 transparent;
+}
+
+.table-view .column-header{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .label{
+    -fx-text-fill: #223b34;
+}
+
+
+
+.table-row-cell{
+    -fx-background-color: #1e3c3a;
+}
+
+
+.table-row-cell:odd{
+    -fx-background-color: #223b34;
+}
+.table-row-cell:even{
+    -fx-background-color: #223b34;
+}
+
+
+.table-view .table-cell{
+    -fx-text-fill: #5ad9bb;
+}
+
+
+.button{
+    -fx-background-color: #328878;
+    -fx-text-fill: #223b34;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+}
+
+.button:hover{
+    -fx-background-color: #5ad9bb;
+}
+
+
+.result-label {
+    -fx-text-fill: #5ad9bb;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+
+    -fx-background-color: rgb(34 59 52);
+    -fx-padding: 15px;
+
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+
+    -fx-border-color: #5ad9bb;
+    -fx-border-width: 1.5px;
+}
+
+
+.queue-cell {
+    -fx-background-color: #5ad9bb;
+    -fx-text-fill: black;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+}
