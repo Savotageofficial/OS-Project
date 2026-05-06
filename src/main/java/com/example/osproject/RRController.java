@@ -3,34 +3,43 @@ package com.example.osproject;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.FlowPane;
-import java.util.List;
+import javafx.scene.layout.VBox;
 
-public class RRController {/*
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Queue;
+public class RRController {
 
     @FXML
     private FlowPane ganttBox;
-
     @FXML
     private TableView<process> tableView;
-
     @FXML
     private Label avgWT, avgTAT, avgRT;
 
     public void loadData(List<process> processes, int quantum) {
         AlgoEval algoEval = new AlgoEval(processes, quantum);
         process[] rr = algoEval.getRrProcesses();
-        List<process> executionOrder = RR.RR(processes.toArray(new process[0]), quantum);
+        RR round = new RR();
+        HashMap<Integer, Queue> hashMap= new HashMap<>();
+        round.RR(processes.toArray(new process[0]), quantum,hashMap);
+        List<process> executionOrder = round.getExecutionOrder();
+        HashMap<Integer, Integer> durations = round.getExecutionDurations();
+        HashMap<Integer, process> timeLine = round.getExecutionTimeline();
 
-        Gantt(executionOrder, quantum);
+        Gantt(durations, executionOrder, timeLine);
+        setupTable();
 
         tableView.getItems().addAll(rr);
-        avgWT.setText("Avg WT: " + algoEval.getRrAvgWT());
-        avgTAT.setText("Avg TAT: " + algoEval.getRrAvgTAT());
-        avgRT.setText("Avg RT: " + algoEval.getRrAvgRT());
+        avgWT.setText("Avg WT= " + algoEval.getRrAvgWT());
+        avgTAT.setText("Avg TAT= " + algoEval.getRrAvgTAT());
+        avgRT.setText("Avg RT= " + algoEval.getRrAvgRT());
     }
 
     private void setupTable() {
@@ -53,22 +62,32 @@ public class RRController {/*
         rtCol.prefWidthProperty().bind(tableView.widthProperty().divide(4.08));
 
         tableView.getColumns().addAll(processCol, wtCol, tatCol, rtCol);
-
         tableView.setPlaceholder(new Label(""));
-
         tableView.setFixedCellSize(25);
-        tableView.prefHeightProperty().bind(tableView.fixedCellSizeProperty().multiply(Bindings.size(tableView.getItems()).add(2)) );
+        tableView.prefHeightProperty().bind(tableView.fixedCellSizeProperty().multiply(Bindings.size(tableView.getItems()).add(3)) );
     }
 
-    private void Gantt(List<process> executionOrder, int quantum) {
+    private void Gantt(HashMap<Integer, Integer> durations, List<process> executionOrder, HashMap<Integer, process> timeline) {
         ganttBox.getChildren().clear();
 
+        int currentTime = timeline.keySet().stream().min(Integer::compare).orElse(0);
         for (process p : executionOrder) {
-            Label block = new Label("P" + p.pid());
-            block.setPrefWidth(quantum * 20);
-            block.getStyleClass().add("gantt-block");
+            int duration = durations.getOrDefault(currentTime, 1);
 
-            ganttBox.getChildren().add(block);
+            Label block = new Label("P" + p.pid());
+            Label timeLabel = new Label(String.valueOf(currentTime));
+            VBox cell = new VBox();
+
+            block.setPrefWidth(40);
+            block.getStyleClass().add("gantt-block");
+            timeLabel.setPrefWidth(block.getPrefWidth());
+            timeLabel.setAlignment(Pos.TOP_LEFT);
+            cell.getChildren().addAll(block, timeLabel);
+
+            ganttBox.getChildren().add(cell);
+            currentTime += duration;
         }
-    }*/
+        Label finalTime = new Label(String.valueOf(currentTime));
+        ganttBox.getChildren().add(finalTime);
+    }
 }
