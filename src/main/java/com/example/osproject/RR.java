@@ -8,7 +8,7 @@ public class RR {
     private double TotalTurnaroundTime = 0;
     private double TotalResponseTime = 0;
 
-    public void Run(process[] processes, int q , HashMap<Integer , Queue> RQs) {
+    public void RR(process[] processes, int q , HashMap<Integer , Queue> RQs) {
         //Reset all the variables for a fresh start
         TotalWaitTime = 0;
         TotalResponseTime = 0;
