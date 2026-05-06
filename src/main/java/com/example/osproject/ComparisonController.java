@@ -43,10 +43,21 @@ public class ComparisonController implements Initializable {
     @FXML
     private StackPane overlay;
     private List<process> processes;
+    SceneSwitcher s = SceneSwitcher.getInstance();
+    @FXML
+    public void next() {
+        System.out.println("next clicked");
+    }
 
-    SceneSwitcher s = new SceneSwitcher();
+    @FXML
+    public void prev() {
+        System.out.println("prev clicked");
+    }
+
+    @FXML
     public void goToInput(ActionEvent e) throws IOException {
-        s.switchToInputScene(e);
+
+        SceneSwitcher.getInstance().switchToInputScene(e);
     }
 
     @Override
@@ -55,40 +66,50 @@ public class ComparisonController implements Initializable {
         met.setCellValueFactory(new PropertyValueFactory<>("metric"));
         rr.setCellValueFactory(new PropertyValueFactory<>("rr"));
         sjf.setCellValueFactory(new PropertyValueFactory<>("srtf"));
+
         overlay.setVisible(false);
+
     }
 
 
     public void setData(List<process> processes) {
+
         this.processes = processes;
-        AlgoEval eval = new AlgoEval(processes, 3);
+        int q = s.getQuantum();
+        AlgoEval eval = new AlgoEval(processes, q);
+
 
         ObservableList<CompareRow> list = FXCollections.observableArrayList();
         list.add(new CompareRow("WT", eval.getRrAvgWT(), eval.getSrtfAvgWT()));
         list.add(new CompareRow("TAT", eval.getRrAvgTAT(), eval.getSrtfAvgTAT()));
         list.add(new CompareRow("RT", eval.getRrAvgRT(), eval.getSrtfAvgRT()));
+
         table.setItems(list);
     }
 
 
     @FXML
     public void result() {
+
         if (processes == null || processes.isEmpty()) {
             resultt.setText("No processes available!");
             overlay.setVisible(true);
             return;
         }
 
-        AlgoEval eval = new AlgoEval(processes, 3);
+        int q = s.getQuantum();
+
+        AlgoEval eval = new AlgoEval(processes, q);
+
         resultt.setText(eval.getConclusion());
         overlay.setOpacity(0);
         overlay.setVisible(true);
-
         FadeTransition ft = new FadeTransition(Duration.millis(300), overlay);
         ft.setFromValue(0);
         ft.setToValue(1);
         ft.play();
     }
+
     @FXML
     public void closeOverlay() {
         overlay.setVisible(false);
