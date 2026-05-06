@@ -109,8 +109,8 @@
     -fx-font-weight: bold;
 }
 
-.L2, .L3, .L4 {
+#L, #L2, #L3, #L4 {
     -fx-text-fill: #ef4444;
     -fx-font-size: 11px;
-    -fx-font-weight: normal;
+    -fx-font-weight: bold;
 }
