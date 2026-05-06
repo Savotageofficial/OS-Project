@@ -2,6 +2,7 @@ package com.example.osproject;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,5 +91,17 @@ public class RRController {
         }
         Label finalTime = new Label(String.valueOf(currentTime));
         ganttBox.getChildren().add(finalTime);
+    }
+    @FXML
+    public void goToInput(ActionEvent e) throws IOException {
+        SceneSwitcher.getInstance().switchToInputScene(e);
+    }
+    @FXML
+    public void goToSJF(ActionEvent e) throws IOException {
+        SceneSwitcher.getInstance().switchToSJFScene(e);
+    }
+    @FXML
+    public void goToCT(ActionEvent e) throws IOException {
+        SceneSwitcher.getInstance().switchToComparisonScene(e);
     }
 }

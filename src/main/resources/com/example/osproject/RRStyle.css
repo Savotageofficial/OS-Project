@@ -1,16 +1,20 @@
 #Anchor1{
-    -fx-background-color: white smoke;
+    -fx-background-color: #f8fafc;
 }
 #TypeOfProcess{
     -fx-font-size: 25;
     -fx-font-weight:700;
-    -fx-background-color: rgb(33, 32, 32);
     -fx-background-radius: 10;
-    -fx-text-fill:rgb(238, 238, 238);
+    -fx-border-radius: 10;
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-border-color: #bfdbfe;
 }
 #output{
     -fx-font-size:30;
-    -fx-font-weight:200;
+    -fx-font-weight:500;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #1d4ed8;
 }
 
 /*****/
@@ -21,23 +25,26 @@
 }
 
 .table-view .column-header-background {
-    -fx-background-color: rgb(33, 32, 32);
-    -fx-border-color: black;
+    -fx-background-color: #dbeafe;
+    -fx-border-color: #dbeafe;
     -fx-border-width: 0.3 0.3 0.3 0.3;
+    -fx-background-radius: 10 10 0 0;
 }
 .table-view .column-header, .table-view .filler {
     -fx-size: 35px;
     -fx-background-color: transparent;
 }
 .table-view .column-header .label {
-    -fx-text-fill:rgb(238, 238, 238);
+    -fx-text-fill: #1d4ed8;
     -fx-font-size: 14px;
-    -fx-border-color: black;
+    -fx-border-color: #dbeafe;
     -fx-border-width: 0 0 0 0;
  }
 .table-view .table-cell {
     -fx-border-color: black;
     -fx-border-width: 0 0.3 0 0;
+    -fx-border-color: #518ede;
+    -fx-text-fill: #1d4ed8;
     -fx-alignment: center;
     -fx-font-size: 16px;
 }
@@ -56,23 +63,45 @@
     -fx-opacity: 0;
     -fx-max-height: 0;
 }
-
+#avgWT{
+    -fx-text-fill: #1d4ed8;
+}
+#avgTAT{
+    -fx-text-fill: #1d4ed8;
+}
+#avgRT{
+    -fx-text-fill: #1d4ed8;
+}
 /*****/
 #gant{
-    -fx-font-size:20;
-    -fx-font-weight:200;
+    -fx-font-size:22;
+    -fx-font-weight:300;
+    -fx-text-fill: #1d4ed8;
 }
 #ganttBox {
     -fx-alignment: center;
     -fx-padding: 10;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
 }
 .gantt-block {
-    -fx-background-color: rgb(238, 238, 238);
-    -fx-border-color: gray;
+    -fx-background-color:#518ede;
+    -fx-border-color: #518ede;
     -fx-border-width: 0.3;
     -fx-alignment: center;
     -fx-padding: 5;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
-    -fx-text-fill: rgb(33, 32, 32);
+    -fx-text-fill: rgb(252, 234, 221);
+}
+.button {
+    -fx-background-color: #60a5fa;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #3b82f6;
 }
