@@ -3,15 +3,53 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="899" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.ComparisonController">
+<AnchorPane prefHeight="500" prefWidth="680" stylesheets="@table.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.ComparisonController">
+
     <children>
-        <Button layoutX="403.0" layoutY="315.0" mnemonicParsing="false" text="compare" />
-      <TableView fx:id="table" layoutX="236.0" layoutY="94.25" maxHeight="94.25" maxWidth="380" prefHeight="380" prefWidth="380">
-        <columns>
-          <TableColumn fx:id="met" prefWidth="75.0" text="Matrics" />
-          <TableColumn fx:id="rr" prefWidth="145.19998168945312" text="RR" />
-            <TableColumn fx:id="sjf" prefWidth="139.9999938964844" text="SJF" />
-        </columns>
-      </TableView>
+
+        <Button layoutX="329.0" layoutY="185.0" mnemonicParsing="false" onAction="#result" text="Compare" />
+        <Button fx:id="bac" onAction="#goToInput" layoutX="522.0" layoutY="185.0" mnemonicParsing="false" text="Back" />
+
+        <TableView fx:id="table" layoutX="306.0" layoutY="30.0" prefHeight="139.0" prefWidth="360">
+
+            <columns>
+                <TableColumn fx:id="met" prefWidth="120" text="Metric" />
+                <TableColumn fx:id="rr" prefWidth="120" text="RR" />
+                <TableColumn fx:id="sjf" prefWidth="120" text="SRTF" />
+            </columns>
+
+        </TableView>
+
+        <StackPane fx:id="overlay" alignment="CENTER" prefHeight="500" prefWidth="680" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
+
+            <children>
+
+                <VBox alignment="CENTER" prefHeight="180" prefWidth="280" spacing="12" style="-fx-background-color: #1e3c3a;
+                 -fx-padding: 15;
+                 -fx-background-radius: 12;
+                 -fx-border-radius: 12;
+                 -fx-border-color: #5ad9bb;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 12, 0.3, 0, 3);">
+
+                    <Label style="-fx-text-fill: white;
+                     -fx-font-size: 14px;
+                     -fx-font-weight: bold;" text="Comparison Result" />
+
+                    <Label fx:id="resultt" alignment="CENTER" maxWidth="240" style="-fx-text-fill: #e0fff7;
+                     -fx-font-size: 13px;
+                     " textAlignment="CENTER" wrapText="true" />
+
+                    <Button onAction="#closeOverlay" style="-fx-background-color: #5ad9bb;
+                    -fx-text-fill: black;" text="Close" />
+
+
+                </VBox>
+
+            </children>
+
+        </StackPane>
+
+
     </children>
+
 </AnchorPane>
