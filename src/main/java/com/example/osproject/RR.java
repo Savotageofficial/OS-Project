@@ -3,17 +3,18 @@ package com.example.osproject;
 import java.util.*;
 
 public class RR {
+    int Processcount, quantum;
+    int[] processes;
+    private static List <process> executionOrder = new ArrayList<>();
+    private static HashMap<Integer, Integer> executionDurations = new HashMap<>();
+    private static HashMap<Integer, process> executionTimeline = new HashMap<>();
 
-    private double TotalWaitTime = 0;
-    private double TotalTurnaroundTime = 0;
-    private double TotalResponseTime = 0;
 
-    public void RR(process[] processes, int q , HashMap<Integer , Queue> RQs) {
-        //Reset all the variables for a fresh start
-        TotalWaitTime = 0;
-        TotalResponseTime = 0;
-        TotalTurnaroundTime = 0;
+    public static void RR(process[] processes, int q,HashMap<Integer, Queue> RQs) {
         int n = processes.length;
+        executionOrder.clear();
+        executionDurations.clear();
+        executionTimeline.clear();
 
         // See What java gonna compare between objects
         Arrays.sort(processes, Comparator.comparingInt(p -> p.arrivaltime));
@@ -30,21 +31,18 @@ public class RR {
                 ready.add(processes[i]);
             }
         }
-        RQs.put(time , ready);
 
         while (completed < n) {
             while (!(ready.isEmpty())) {
 
                 process p = ready.poll();
-                // record first response time if process hasn't started yet
-                if (!p.started) {
-                    p.responsetime = time - p.arrivaltime;
-                    p.started = true;
-                }
                 // Checking the ready
                 if (p.remainingtime > q) {
                     // execute the process completely in its time quantum
                     p.remainingtime -= q;
+                    executionOrder.add(p);
+                    executionTimeline.put(time, p);
+                    executionDurations.put(time, q);
                     time += q;
                     // check what processes arrived , aka what processes have arrival time = time
                     // and add them to arrived
@@ -56,9 +54,11 @@ public class RR {
                     }
                     // insert p at the end of the queue
                     ready.add(p);
-                    RQs.put(time , ready);
                 } else if (p.remainingtime <= q) {
                     // execute p for its remaining time
+                    executionOrder.add(p);
+                    executionTimeline.put(time, p);
+                    executionDurations.put(time, p.remainingtime);
                     time += p.remainingtime;
                     p.completiontime = time;
                     p.turnaroundtime = time - p.arrivaltime;
@@ -75,7 +75,6 @@ public class RR {
                             ready.add(processes[i]);
                         }
                     }
-                    RQs.put(time , ready);
 
                 }
             }
@@ -87,19 +86,22 @@ public class RR {
                         ready.add(processes[i]);
                     }
                 }
-                RQs.put(time , ready);
 
             }
         }
-        for (process p : processes) {
-            System.out.println("p" + p.pid + " Completion Time:" + p.completiontime + " Waiting Time:" + p.waitingtime
-                    + " Turnaround Time:" + p.turnaroundtime + " Response time:" + p.responsetime);
-            TotalTurnaroundTime += p.turnaroundtime;
-            TotalWaitTime += p.waitingtime;
-            TotalResponseTime += p.responsetime;
 
-        }
 
+
+    }
+    public HashMap<Integer, Integer> getExecutionDurations() {
+        return executionDurations;
+    }
+
+    public HashMap<Integer, process> getExecutionTimeline() {
+        return executionTimeline;
+    }
+    public List<process> getExecutionOrder() {
+        return executionOrder;
     }
 
 }
