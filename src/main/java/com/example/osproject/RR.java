@@ -36,6 +36,11 @@ public class RR {
             while (!(ready.isEmpty())) {
 
                 process p = ready.poll();
+
+                if (!p.started) {
+                    p.responsetime = time - p.arrivaltime;
+                    p.started = true;
+                }
                 // Checking the ready
                 if (p.remainingtime > q) {
                     // execute the process completely in its time quantum

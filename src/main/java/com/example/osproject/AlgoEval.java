@@ -91,9 +91,6 @@ public class AlgoEval {
             sb.append("Both are equally good.\n");
         }
 
-        sb.append("Quantum = ").append(quantum)
-                .append(" affects RR context-switch overhead.\n");
-
         return sb.toString();
     }
 
