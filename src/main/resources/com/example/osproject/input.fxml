@@ -58,7 +58,7 @@
       </VBox>
    </left>
    <right>
-      <VBox spacing="15.0" styleClass="right-pane">
+      <VBox prefHeight="442.0" prefWidth="275.0" spacing="15.0" styleClass="right-pane">
       <TableView fx:id="table" prefHeight="221.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn fx:id="PID" prefWidth="63.20001220703125" text="PID" />
@@ -80,6 +80,7 @@
          <BorderPane.margin>
             <Insets right="60.0" top="-3.0" />
          </BorderPane.margin>
+
       </VBox>
    </right>
    <top>

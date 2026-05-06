@@ -81,11 +81,18 @@ public class InputController implements Initializable {
         burst.clear();
         resetError();
     }
-
+    private boolean hasProcesses() {
+        if (processes.isEmpty()) {
+            L4.setText("You must add process");
+            return false;
+        }
+        return true;
+    }
     SceneSwitcher s= new SceneSwitcher();
     public void goToRR(ActionEvent e) throws IOException {
         try{
             resetError();
+            if (!hasProcesses()) return;
             if(quantum.getText().isEmpty()){
                 L.setText("You Must enter Quantum Number");
             }
@@ -105,12 +112,14 @@ public class InputController implements Initializable {
     }
 
     public void goToSJF(ActionEvent e) throws IOException {
+        if (!hasProcesses()) return;
         s.setProcesses(processes);
         s.switchToSJFScene(e);
     }
     public void goToComparison(ActionEvent e) throws IOException {
         try{
             resetError();
+            if (!hasProcesses()) return;
             if(quantum.getText().isEmpty()){
                 L.setText("You Must enter Quantum Number");
             }
