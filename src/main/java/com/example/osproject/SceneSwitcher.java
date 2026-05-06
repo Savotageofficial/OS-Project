@@ -38,50 +38,60 @@ public class SceneSwitcher {
     private Scene scene;
     private Parent root;
 
+
     public void switchToInputScene(ActionEvent e) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("input.fxml"));
         root=loader.load();
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(root);
+        scene = new Scene(root);
         InputController input = loader.getController();
         input.loadData(this.processes,this.quantum);
         scene.getStylesheets().add(SceneSwitcher.class.getResource("input.css").toExternalForm());
-
+        stage.setWidth(670);
+        stage.setHeight(500);
+        stage.setScene(scene);
         stage.show();
     }
     public void switchToRRScene(ActionEvent e) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("RR-result.fxml"));
         root=loader.load();
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(root);
+        scene = new Scene(root);
         RRController rr = loader.getController();
        /* rr.loadData(
                 SceneSwitcher.getInstance().getProcesses(),
                 SceneSwitcher.getInstance().getQuantum()
         );*/
         scene.getStylesheets().add(SceneSwitcher.class.getResource("RRStyle.css").toExternalForm());
-
+        stage.setWidth(680);
+        stage.setHeight(500);
+        stage.setScene(scene);
         stage.show();
     }
     public void switchToSJFScene(ActionEvent e) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("SJF.fxml"));
         root=loader.load();
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(root);
+        scene = new Scene(root);
         SJFController s = loader.getController();
-       /* s.setProcesses(SceneSwitcher.getInstance().getProcesses());*/
+        /* s.setProcesses(SceneSwitcher.getInstance().getProcesses());*/
         scene.getStylesheets().add(SceneSwitcher.class.getResource("SJFStyle.css").toExternalForm());
-
+        stage.setScene(scene);
+        stage.setWidth(680);
+        stage.setHeight(500);
         stage.show();
     }
     public void switchToComparisonScene(ActionEvent e) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("Comparison.fxml"));
         root=loader.load();
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(root);
+        scene = new Scene(root);
         ComparisonController c = loader.getController();
         c.setData(processes);
         //scene.getStylesheets().add(SceneSwitcher.class.getResource("ComStyle.css").toExternalForm());
+        stage.setWidth(680);
+        stage.setHeight(500);
+        stage.setScene(scene);
         stage.show();
     }
 }

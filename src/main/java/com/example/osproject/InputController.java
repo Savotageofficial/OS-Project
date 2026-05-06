@@ -94,6 +94,7 @@ public class InputController implements Initializable {
     public void goToRR(ActionEvent e) throws IOException {
         try{
             resetError();
+            SceneSwitcher.getInstance().setProcesses(processes);
             if (!hasProcesses()) return;
             if(quantum.getText().isEmpty()){
                 L.setText("You Must enter Quantum Number");
@@ -109,18 +110,20 @@ public class InputController implements Initializable {
             s.switchToRRScene(e);
             }
         }catch (NumberFormatException ex){
-            L4.setText("enter value");
+            L.setText("enter valid value");
         }
     }
 
     public void goToSJF(ActionEvent e) throws IOException {
         if (!hasProcesses()) return;
+        SceneSwitcher.getInstance().setProcesses(processes);
         s.setProcesses(processes);
         s.setQuantum(quantum.getText().isEmpty() ? 0 : Integer.parseInt(quantum.getText()));
         s.switchToSJFScene(e);
     }
     public void goToComparison(ActionEvent e) throws IOException {
         if (!hasProcesses()) return;
+        SceneSwitcher.getInstance().setProcesses(processes);
         s.setProcesses(processes);
         s.setQuantum(quantum.getText().isEmpty() ? 0 : Integer.parseInt(quantum.getText()));
         s.switchToComparisonScene(e);
@@ -130,17 +133,11 @@ public class InputController implements Initializable {
         if (savedProcesses != null) {
             processes.clear();
             processes.addAll(savedProcesses);
-
-
             initialId = processes.size() + 1;
             processid.setText(String.valueOf(initialId));
-
         }
-
         table.setItems(processes);
         table.refresh();
-
-
         if (q > 0) {
             quantum.setText(String.valueOf(q));
         }
