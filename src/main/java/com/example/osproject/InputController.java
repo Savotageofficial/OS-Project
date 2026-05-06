@@ -7,6 +7,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -88,7 +89,8 @@ public class InputController implements Initializable {
         }
         return true;
     }
-    SceneSwitcher s= new SceneSwitcher();
+    SceneSwitcher s = SceneSwitcher.getInstance();
+
     public void goToRR(ActionEvent e) throws IOException {
         try{
             resetError();
@@ -114,30 +116,35 @@ public class InputController implements Initializable {
     public void goToSJF(ActionEvent e) throws IOException {
         if (!hasProcesses()) return;
         s.setProcesses(processes);
+        s.setQuantum(quantum.getText().isEmpty() ? 0 : Integer.parseInt(quantum.getText()));
         s.switchToSJFScene(e);
     }
     public void goToComparison(ActionEvent e) throws IOException {
-        try{
-            resetError();
-            if (!hasProcesses()) return;
-            if(quantum.getText().isEmpty()){
-                L.setText("You Must enter Quantum Number");
-            }
-            else{
-                int q = Integer.parseInt(quantum.getText());
-                if(q<=0){
-                    L4.setText("Invalid value");
-                    return;
-                }
-                s.setProcesses(processes);
-                s.setQuantum(q);
-                s.switchToComparisonScene(e);
-            }
-        }catch (NumberFormatException ex){
-            L4.setText("You Must enter Quantum Number");
-        }
+        if (!hasProcesses()) return;
+        s.setProcesses(processes);
+        s.setQuantum(quantum.getText().isEmpty() ? 0 : Integer.parseInt(quantum.getText()));
+        s.switchToComparisonScene(e);
     }
 
+    public void loadData(List<process> savedProcesses, int q) {
+        if (savedProcesses != null) {
+            processes.clear();
+            processes.addAll(savedProcesses);
+
+
+            initialId = processes.size() + 1;
+            processid.setText(String.valueOf(initialId));
+
+        }
+
+        table.setItems(processes);
+        table.refresh();
+
+
+        if (q > 0) {
+            quantum.setText(String.valueOf(q));
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -146,5 +153,6 @@ public class InputController implements Initializable {
         AT.setCellValueFactory(new PropertyValueFactory<>("Arrivaltime"));
         BT.setCellValueFactory(new PropertyValueFactory<>("Bursttime"));
         table.setItems(processes);
+        table.refresh();
     }
 }
