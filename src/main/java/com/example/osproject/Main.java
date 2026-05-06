@@ -20,8 +20,8 @@ public class Main extends Application {
         stage.setTitle("OS Project");
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("input.css").toExternalForm());
-        stage.setHeight(600);
-        stage.setWidth(899);
+        stage.setHeight(500);
+        stage.setWidth(680);
         stage.setResizable(false);
         stage.show();
     }

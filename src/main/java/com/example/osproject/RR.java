@@ -5,9 +5,8 @@ import java.util.*;
 public class RR {
     int Processcount, quantum;
     int[] processes;
-    static List<process> executionOrder = new ArrayList<>();
 
-    public static List<process> RR(process[] processes, int q) {
+    public static void RR(process[] processes, int q) {
         int n = processes.length;
 
         // See What java gonna compare between objects
@@ -34,7 +33,6 @@ public class RR {
                 if (p.remainingtime > q) {
                     // execute the process completely in its time quantum
                     p.remainingtime -= q;
-                    executionOrder.add(p);
                     time += q;
                     // check what processes arrived , aka what processes have arrival time = time
                     // and add them to arrived
@@ -54,7 +52,6 @@ public class RR {
                     p.waitingtime = p.turnaroundtime - p.bursttime;
                     p.remainingtime = 0;
                     p.completed = true;
-                    executionOrder.add(p);
                     completed++;
 
                     // check what processes arrived , aka what processes have arrival time = time
@@ -81,7 +78,7 @@ public class RR {
         }
 
 
-   return executionOrder; }
+
+    }
+
 }
-
-
