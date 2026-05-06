@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.osproject.SJFController"
-            prefHeight="600.0" prefWidth="899.0">
+<?import javafx.geometry.Insets?>
+<BorderPane prefHeight="500.0" prefWidth="680.0" stylesheets="/com/example/osproject/SJFStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.SJFController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label styleClass="title" text="Output:" textFill="#175266">
+            <font>
+               <Font name="System Bold Italic" size="23.0" />
+            </font></Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label styleClass="tag" text="SJF">
+            <font>
+               <Font size="17.0" />
+            </font></Label>
+        </HBox>
+    </top>
 
-</AnchorPane>
+</BorderPane>
