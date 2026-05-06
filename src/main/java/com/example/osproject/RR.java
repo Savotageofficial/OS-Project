@@ -6,7 +6,7 @@ public class RR {
     int Processcount, quantum;
     int[] processes;
 
-    public static void RR(process[] processes, int q) {
+    public static void RR(process[] processes, int q,HashMap<Integer, Queue> RQs) {
         int n = processes.length;
 
         // See What java gonna compare between objects

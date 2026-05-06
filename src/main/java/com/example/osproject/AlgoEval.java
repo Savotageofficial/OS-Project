@@ -22,7 +22,7 @@ public class AlgoEval {
         // Run both algorithms using the existing classes
         RR RR = new RR();
         HashMap<Integer , Queue> rqs = new HashMap<>();
-        RR.Run(rrProcesses, quantum , rqs);
+        RR.RR(rrProcesses, quantum , rqs);
         SJF sjf = new SJF(srtfProcesses);
         sjf.Run();
 
@@ -83,9 +83,16 @@ public class AlgoEval {
                 : srtfAvgRT < rrAvgRT ? "Lower Avg RT:  SRTF\n"
                 : "Avg RT:        Tied\n");
 
-        sb.append("RR is better.\n");
-        sb.append("SRTF is better.\n");
-        sb.append("Quantum = ").append(quantum).append(" affects RR context-switch overhead.\n");
+        if ((rrAvgWT + rrAvgTAT + rrAvgRT) < (srtfAvgWT + srtfAvgTAT + srtfAvgRT)) {
+            sb.append("RR is better\n");
+        } else if ((rrAvgWT + rrAvgTAT + rrAvgRT) > (srtfAvgWT + srtfAvgTAT + srtfAvgRT)) {
+            sb.append("SRTF is better\n");
+        } else {
+            sb.append("Both are equally good.\n");
+        }
+
+        sb.append("Quantum = ").append(quantum)
+                .append(" affects RR context-switch overhead.\n");
 
         return sb.toString();
     }
