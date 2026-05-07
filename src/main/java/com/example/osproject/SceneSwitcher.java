@@ -59,10 +59,7 @@ public class SceneSwitcher {
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         RRController rr = loader.getController();
-       /* rr.loadData(
-                SceneSwitcher.getInstance().getProcesses(),
-                SceneSwitcher.getInstance().getQuantum()
-        );*/
+        rr.loadData(SceneSwitcher.getInstance().getProcesses(), SceneSwitcher.getInstance().getQuantum());
         scene.getStylesheets().add(SceneSwitcher.class.getResource("RRStyle.css").toExternalForm());
         stage.setWidth(680);
         stage.setHeight(500);
@@ -75,7 +72,7 @@ public class SceneSwitcher {
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         SJFController s = loader.getController();
-        /* s.setProcesses(SceneSwitcher.getInstance().getProcesses());*/
+         s.setProcesses(SceneSwitcher.getInstance().getProcesses());
         scene.getStylesheets().add(SceneSwitcher.class.getResource("SJFStyle.css").toExternalForm());
         stage.setScene(scene);
         stage.setWidth(680);
@@ -90,7 +87,7 @@ public class SceneSwitcher {
         scene = new Scene(root);
         ComparisonController c = loader.getController();
         c.setData(processes);
-        //scene.getStylesheets().add(SceneSwitcher.class.getResource("ComStyle.css").toExternalForm());
+        scene.getStylesheets().add(SceneSwitcher.class.getResource("table.css").toExternalForm());
         stage.setWidth(680);
         stage.setHeight(500);
         stage.setScene(scene);

@@ -122,11 +122,26 @@ public class InputController implements Initializable {
         s.switchToSJFScene(e);
     }
     public void goToComparison(ActionEvent e) throws IOException {
-        if (!hasProcesses()) return;
-        SceneSwitcher.getInstance().setProcesses(processes);
-        s.setProcesses(processes);
-        s.setQuantum(quantum.getText().isEmpty() ? 0 : Integer.parseInt(quantum.getText()));
-        s.switchToComparisonScene(e);
+        try{
+            resetError();
+            SceneSwitcher.getInstance().setProcesses(processes);
+            if (!hasProcesses()) return;
+            if(quantum.getText().isEmpty()){
+                L.setText("You Must enter Quantum Number");
+            }
+            else{
+                int q = Integer.parseInt(quantum.getText());
+                if(q<=0){
+                    L4.setText("Invalid value");
+                    return;
+                }
+                s.setProcesses(processes);
+                s.setQuantum(q);
+                s.switchToComparisonScene(e);
+            }
+        }catch (NumberFormatException ex){
+            L.setText("enter valid value");
+        }
     }
 
     public void loadData(List<process> savedProcesses, int q) {
