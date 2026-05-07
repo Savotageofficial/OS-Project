@@ -5,12 +5,11 @@ import java.util.*;
 public class RR {
     int Processcount, quantum;
     int[] processes;
-    private  List <process> executionOrder = new ArrayList<>();
-    private  HashMap<Integer, Integer> executionDurations = new HashMap<>();
-    private  HashMap<Integer, process> executionTimeline = new HashMap<>();
+    private List<process> executionOrder = new ArrayList<>();
+    private HashMap<Integer, Integer> executionDurations = new HashMap<>();
+    private HashMap<Integer, process> executionTimeline = new HashMap<>();
 
-
-    public  void RR(process[] processes, int q,HashMap<Integer, Queue> RQs) {
+    public void RR(process[] processes, int q, HashMap<Integer, Queue> RQs) {
         int n = processes.length;
         executionOrder.clear();
         executionDurations.clear();
@@ -34,6 +33,12 @@ public class RR {
 
         while (completed < n) {
             while (!(ready.isEmpty())) {
+
+                Queue<Integer> snapshot = new LinkedList<>();
+                for (process rp : ready) {
+                    snapshot.add(rp.pid());
+                }
+                RQs.put(time, snapshot);
 
                 process p = ready.poll();
 
@@ -95,9 +100,8 @@ public class RR {
             }
         }
 
-
-
     }
+
     public HashMap<Integer, Integer> getExecutionDurations() {
         return executionDurations;
     }
