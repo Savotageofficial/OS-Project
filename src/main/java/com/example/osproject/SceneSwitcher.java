@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class SceneSwitcher {
+    public static String quantumValue="";
     private List<process> processes;
     private int quantum;
     private static SceneSwitcher instance = new SceneSwitcher();

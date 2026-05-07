@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.geometry.Insets?>
 <BorderPane prefHeight="500.0" prefWidth="680.0" stylesheets="/com/example/osproject/SJFStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.SJFController">
     <top>
         <HBox alignment="CENTER_LEFT" spacing="10">
@@ -23,15 +23,15 @@
         <VBox alignment="TOP_CENTER" spacing="15">
 
 
-            <Label text="Gantt Chart" textFill="#4193ae">
+            <Label text="Gantt Chart" textFill="#1d4ed8">
                 <font>
-                    <Font name="Bodoni MT Bold" size="23.0" />
+                    <Font name="Bodoni MT Bold Italic" size="26.0" />
                 </font></Label>
 
-            <VBox fx:id="ganttBox" alignment="CENTER" spacing="5" fillWidth="true"/>
+            <VBox fx:id="ganttBox" alignment="CENTER" fillWidth="true" spacing="5" />
 
 
-            <TableView fx:id="table"  maxWidth="Infinity" >
+            <TableView fx:id="table" maxWidth="Infinity">
                 <columns>
                     <TableColumn fx:id="pidCol" text="PID" />
                     <TableColumn fx:id="wtCol" text="WT" />
@@ -40,15 +40,15 @@
                 </columns>
             </TableView>
             <HBox alignment="CENTER" spacing="20">
-                <Label fx:id="avgWT" text="Average WT: -" textFill="#2f74b9" maxWidth="Infinity" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                <Label fx:id="avgWT" maxWidth="Infinity" text="Average WT: -" textAlignment="CENTER" textFill="#2f74b9" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="System Italic" size="16.0" />
                     </font></Label>
-                <Label fx:id="avgTAT" text="Average TAT: -" textFill="#2f74b9" maxWidth="Infinity" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                <Label fx:id="avgTAT" maxWidth="Infinity" text="Average TAT: -" textAlignment="CENTER" textFill="#2f74b9" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="16.0" />
                     </font></Label>
-                <Label fx:id="avgRT" text="Average RT: -" textFill="#2f74b9" maxWidth="Infinity" HBox.hgrow="ALWAYS" textAlignment="CENTER">
+                <Label fx:id="avgRT" maxWidth="Infinity" text="Average RT: -" textAlignment="CENTER" textFill="#2f74b9" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="16.0" />
                     </font></Label>
@@ -58,7 +58,7 @@
     </center>
     <bottom>
         <HBox alignment="CENTER_RIGHT" spacing="10">
-            <padding> <Insets bottom="30" right="30"/> </padding>
+            <padding> <Insets bottom="30" right="30" /> </padding>
             <Button onAction="#goToInput" styleClass="nav-btn" text="Input" />
             <Button onAction="#goToRR" styleClass="nav-btn" text="RR" />
             <Button onAction="#goToComparison" styleClass="nav-btn" text="Comparison" />

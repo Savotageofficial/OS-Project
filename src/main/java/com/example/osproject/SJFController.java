@@ -1,15 +1,19 @@
 package com.example.osproject;
 import com.example.osproject.SJF;
 import com.example.osproject.process;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.collections.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.control.OverrunStyle;
 
+import java.io.IOException;
 import java.util.List;
 
 public class  SJFController {
@@ -91,62 +95,128 @@ private void fillTable(process[]processes){
          avgTAT.setText("Average TAT= " + totalTAT + "/" + n + "=" + String.format ("%.3f",totalTAT / n));
          avgRT.setText("Average RT= " + totalRT + "/" + n + "=" +  String.format("%.3f",totalRT / n));
      }
-     private void drawGanttChart(process[] processes){
+    private void drawGanttChart(process[] processes) {
 
-             ganttBox.getChildren().clear();
+        ganttBox.getChildren().clear();
 
-             VBox container = new VBox(5);
-             container.setAlignment(Pos.CENTER);
-
-             HBox blocks = new HBox(0);
-             blocks.setAlignment(Pos.CENTER);
-
-             HBox times = new HBox(0);
-             times.setAlignment(Pos.CENTER);
-
-             int currentTime = processes[0].getArrivaltime();
-            int scale= 15;
-
-             Label start = new Label(String.valueOf(currentTime));
-             start.setMinWidth(0);
-             times.getChildren().add(start);
-             start.getStyleClass().add("gantt-time");
-
-             for (process p : processes) {
-                 int width=p.getBursttime()*scale;
+        VBox container = new VBox(5);
+        container.setAlignment(Pos.CENTER);
 
 
-                 Label block = new Label("P" + p.pid());
-                 block.getStyleClass().add("gantt-block");
-                 int finalWidth=Math.max(width,60);
-                 block.setMinWidth(finalWidth);
-                 block.setMaxWidth(finalWidth);
-                 block.setPrefWidth(finalWidth);
-                  block.setTextOverrun(OverrunStyle.CLIP);
-                 blocks.getChildren().add(block);
+        HBox blocks = new HBox(0);
+        blocks.setAlignment(Pos.CENTER);
 
-                 currentTime += p.getBursttime();
+        int scale = 15;
 
-                 Label t = new Label(String.valueOf(currentTime));
-                 t.setMinWidth(width);
-                 t.setMaxWidth(width);
-                 t.getStyleClass().add("gantt-time");
-                 t.setAlignment(Pos.CENTER_RIGHT);
+        for (process p : processes) {
 
-                 times.getChildren().add(t);
-             }
+            int width = p.getBursttime() * scale;
 
-             container.getChildren().addAll(blocks, times);
-             ganttBox.getChildren().add(container);
-         }
+            Label block = new Label("P" + p.pid());
+
+            block.getStyleClass().add("gantt-block");
+
+            block.setPrefWidth(width);
+            block.setMinWidth(width);
+            block.setMaxWidth(width);
+
+            block.setAlignment(Pos.CENTER);
+
+            blocks.getChildren().add(block);
+        }
+
+        Pane times = new Pane();
+        times.setPrefHeight(30);
+
+        int currentTime = processes[0].getArrivaltime();
+        int position = 0;
+
+
+        Label start = new Label(String.valueOf(currentTime));
+
+        start.setLayoutX(0);
+        start.setLayoutY(0);
+
+        start.getStyleClass().add("gantt-time");
+
+        times.getChildren().add(start);
+        for (process p : processes) {
+
+            int width = p.getBursttime() * scale;
+
+            position += width;
+            currentTime += p.getBursttime();
+
+            Label t = new Label(String.valueOf(currentTime));
+
+            t.setLayoutX(position - 5);
+            t.setLayoutY(0);
+
+            t.getStyleClass().add("gantt-time");
+
+            times.getChildren().add(t);
+        }
+
+        blocks.setMaxWidth(Region.USE_PREF_SIZE);
+
+        times.setPrefWidth(position);
+        times.setMaxWidth(position);
+
+        container.setAlignment(Pos.CENTER);
+
+        container.getChildren().addAll(blocks, times);
+
+        ganttBox.setAlignment(Pos.CENTER);
+        ganttBox.getChildren().add(container);
+    }
+
 
      @FXML public void goToInput(javafx.event.ActionEvent e)throws  java.io.IOException{
          SceneSwitcher.getInstance().switchToInputScene(e);
      }
-    @FXML public void goToRR(javafx.event.ActionEvent e)throws  java.io.IOException{
+    @FXML public void goToRR(ActionEvent e)throws  IOException{
+        if (SceneSwitcher.quantumValue == null
+                || SceneSwitcher.quantumValue.trim().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+
+            alert.setTitle("Warning");
+            alert.setHeaderText("Missing Quantum");
+            alert.setContentText("Please enter Quantum first!");
+
+            alert.getDialogPane().getStylesheets().add(
+                    getClass().getResource("SJFStyle.css").toExternalForm()
+            );
+
+            alert.showAndWait();
+
+            SceneSwitcher.getInstance().switchToInputScene(e);
+
+            return;
+        }
          SceneSwitcher.getInstance().switchToRRScene(e);
     }
     @FXML public void goToComparison(javafx.event.ActionEvent e)throws  java.io.IOException{
+        if (SceneSwitcher.quantumValue == null
+                || SceneSwitcher.quantumValue.trim().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+
+            alert.setTitle("Warning");
+            alert.setHeaderText("Missing Quantum");
+            alert.setContentText("Please enter Quantum first!");
+
+            alert.getDialogPane().getStylesheets().add(
+                    getClass().getResource("SJFStyle.css").toExternalForm()
+            );
+
+            alert.showAndWait();
+
+            SceneSwitcher.getInstance().switchToInputScene(e);
+
+            return;
+        }
+
         SceneSwitcher.getInstance().switchToComparisonScene(e);
     }
 
