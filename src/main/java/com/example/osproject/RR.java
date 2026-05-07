@@ -5,12 +5,12 @@ import java.util.*;
 public class RR {
     int Processcount, quantum;
     int[] processes;
-    private static List <process> executionOrder = new ArrayList<>();
-    private static HashMap<Integer, Integer> executionDurations = new HashMap<>();
-    private static HashMap<Integer, process> executionTimeline = new HashMap<>();
+    private  List <process> executionOrder = new ArrayList<>();
+    private  HashMap<Integer, Integer> executionDurations = new HashMap<>();
+    private  HashMap<Integer, process> executionTimeline = new HashMap<>();
 
 
-    public static void RR(process[] processes, int q,HashMap<Integer, Queue> RQs) {
+    public  void RR(process[] processes, int q,HashMap<Integer, Queue> RQs) {
         int n = processes.length;
         executionOrder.clear();
         executionDurations.clear();

@@ -49,7 +49,8 @@ public class  SJFController {
     }
     private void runSJF(List<process>processes){
         if(processes==null||processes.isEmpty())return;
-        process[]arr=processes.toArray(new process[0]);
+        process[] arr = processes.stream().map(process::copy).toArray(process[]::new);
+
 
         SJF sjf=new SJF(arr);
         sjf.Run();

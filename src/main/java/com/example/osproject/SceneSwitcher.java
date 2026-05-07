@@ -53,6 +53,7 @@ public class SceneSwitcher {
         stage.show();
     }
     public void switchToRRScene(ActionEvent e) throws IOException {
+        if (quantum <= 0) { switchToInputScene(e); return; }
         FXMLLoader loader=new FXMLLoader(getClass().getResource("RR-result.fxml"));
         root=loader.load();
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
@@ -82,6 +83,7 @@ public class SceneSwitcher {
         stage.show();
     }
     public void switchToComparisonScene(ActionEvent e) throws IOException {
+        if (quantum <= 0) { switchToInputScene(e); return; }
         FXMLLoader loader=new FXMLLoader(getClass().getResource("Comparison.fxml"));
         root=loader.load();
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
