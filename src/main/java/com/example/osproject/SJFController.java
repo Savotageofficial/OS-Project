@@ -197,6 +197,26 @@ private void fillTable(process[]processes){
          SceneSwitcher.getInstance().switchToRRScene(e);
     }
     @FXML public void goToComparison(javafx.event.ActionEvent e)throws  java.io.IOException{
+        if (SceneSwitcher.quantumValue == null
+                || SceneSwitcher.quantumValue.trim().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+
+            alert.setTitle("Warning");
+            alert.setHeaderText("Missing Quantum");
+            alert.setContentText("Please enter Quantum first!");
+
+            alert.getDialogPane().getStylesheets().add(
+                    getClass().getResource("SJFStyle.css").toExternalForm()
+            );
+
+            alert.showAndWait();
+
+            SceneSwitcher.getInstance().switchToInputScene(e);
+
+            return;
+        }
+
         SceneSwitcher.getInstance().switchToComparisonScene(e);
     }
 
