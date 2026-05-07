@@ -51,6 +51,10 @@ public class ComparisonController implements Initializable {
     private Label time;
     @FXML
     private HBox rq;
+    @FXML
+    private Button rb;
+    @FXML
+    private Button sb;
 
     @FXML
     private StackPane overlay;
@@ -58,8 +62,12 @@ public class ComparisonController implements Initializable {
     private List<Integer> timeSteps;
     private int currentTimeIndex = 0;
     private HashMap<Integer, Queue> rrReadyQueues;
+
     SceneSwitcher s = SceneSwitcher.getInstance();
     private List<List<String>> queueSteps = new ArrayList<>();
+
+
+
     private int currentStep = 0;
 
     @FXML
@@ -91,6 +99,13 @@ public class ComparisonController implements Initializable {
 
         SceneSwitcher.getInstance().switchToInputScene(e);
     }
+    @FXML
+    public void goToSJF(ActionEvent e) throws IOException {
+        SceneSwitcher.getInstance().switchToSJFScene(e);
+    }
+    @FXML public void goToRR(javafx.event.ActionEvent e)throws  java.io.IOException{
+        SceneSwitcher.getInstance().switchToRRScene(e);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -100,9 +115,7 @@ public class ComparisonController implements Initializable {
         sjf.setCellValueFactory(new PropertyValueFactory<>("srtf"));
 
         overlay.setVisible(false);
-
     }
-
     public void setData(List<process> processes) {
 
         this.processes = processes;
@@ -142,7 +155,6 @@ public class ComparisonController implements Initializable {
             queueSteps.add(step);
         }
     }
-
     private void showStep(int step) {
         if (queueSteps.isEmpty())
             return;
@@ -184,7 +196,6 @@ public class ComparisonController implements Initializable {
             overlay.setVisible(true);
             return;
         }
-
         int q = s.getQuantum();
 
         AlgoEval eval = new AlgoEval(processes, q);

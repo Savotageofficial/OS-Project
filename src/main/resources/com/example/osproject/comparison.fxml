@@ -8,8 +8,10 @@
 
     <children>
 
-        <Button layoutX="228.0" layoutY="185.0" mnemonicParsing="false" onAction="#result" text="Compare" />
-        <Button fx:id="bac" layoutX="380.0" layoutY="185.0" mnemonicParsing="false" onAction="#goToInput" text="Back" />
+        <Button layoutX="300.0" layoutY="185.0" mnemonicParsing="false" onAction="#result" text="Compare" />
+        <Button fx:id="bac" layoutX="42.0" layoutY="161.0" mnemonicParsing="false" onAction="#goToInput" text="Input" />
+        <Button fx:id="rb" layoutX="42.0" layoutY="35.0" mnemonicParsing="false" onAction="#goToRR" prefHeight="28.0" prefWidth="59.0" text="RR" />
+        <Button fx:id="sb" layoutX="42.0" layoutY="100.0" mnemonicParsing="false" onAction="#goToSJF" prefHeight="28.0" prefWidth="59.0" text="SJF" />
 
         <TableView fx:id="table" layoutX="160.0" layoutY="24.0" prefHeight="151.0" prefWidth="360">
 
@@ -36,25 +38,50 @@
         </HBox>
 
 
-        <StackPane fx:id="overlay" alignment="CENTER" prefHeight="500" prefWidth="680" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
+        <StackPane fx:id="overlay"
+                   alignment="CENTER"
+                   prefHeight="500"
+                   prefWidth="680"
+                   style="-fx-background-color: rgba(0,0,0,0.35);"
+                   visible="false">
 
             <children>
 
-                <VBox alignment="CENTER" prefHeight="180" prefWidth="280" spacing="12" style="-fx-background-color: #1e3c3a; -fx-padding: 15; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #5ad9bb; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 12, 0.3, 0, 3);">
+                <VBox alignment="CENTER"
+                      prefHeight="160"
+                      prefWidth="220"
+                      spacing="10"
+                      style="-fx-background-color: #0d47a1;
+                     -fx-padding: 12;
+                     -fx-background-radius: 12;
+                     -fx-border-radius: 12;
+                     -fx-border-color: #90caf9;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.3, 0, 3);">
 
-                    <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Comparison Result" />
+                    <Label text="Comparison Result"
+                           style="-fx-text-fill: #e3f2fd;
+                          -fx-font-size: 13px;
+                          -fx-font-weight: bold;" />
 
-                    <Label fx:id="resultt" alignment="CENTER" maxWidth="240" style="-fx-text-fill: #e0fff7; -fx-font-size: 13px; " textAlignment="CENTER" wrapText="true" />
+                    <Label fx:id="resultt"
+                           alignment="CENTER"
+                           maxWidth="200"
+                           wrapText="true"
+                           textAlignment="CENTER"
+                           style="-fx-text-fill: #bbdefb;
+                          -fx-font-size: 12px;" />
 
-                    <Button onAction="#closeOverlay" style="-fx-background-color: #5ad9bb; -fx-text-fill: black;" text="Close" />
+                    <Button text="Close"
+                            onAction="#closeOverlay"
+                            style="-fx-background-color: #2196f3;
+                           -fx-text-fill: white;" />
 
                 </VBox>
 
-
             </children>
 
-
         </StackPane>
+
 
 
 
