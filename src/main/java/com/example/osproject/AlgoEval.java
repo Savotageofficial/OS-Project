@@ -12,6 +12,7 @@ public class AlgoEval {
     private double rrAvgWT, rrAvgTAT, rrAvgRT;
     // Averages for SRTF
     private double srtfAvgWT, srtfAvgTAT, srtfAvgRT;
+    private HashMap<Integer, Queue> rrReadyQueues;
 
     public AlgoEval(List<process> originalProcesses, int quantum) {
         this.quantum = quantum;
@@ -20,9 +21,9 @@ public class AlgoEval {
         srtfProcesses = copyList(originalProcesses);
 
         // Run both algorithms using the existing classes
-        RR RR = new RR();
-        HashMap<Integer , Queue> rqs = new HashMap<>();
-        RR.RR(rrProcesses, quantum , rqs);
+        RR rrRunner = new RR();
+        rrReadyQueues = new HashMap<>();
+        rrRunner.RR(rrProcesses, quantum, rrReadyQueues);
         SJF sjf = new SJF(srtfProcesses);
         sjf.Run();
 
@@ -102,7 +103,6 @@ public class AlgoEval {
         return arr;
     }
 
-
     public process[] getRrProcesses() {
         return rrProcesses;
     }
@@ -135,5 +135,8 @@ public class AlgoEval {
         return srtfAvgRT;
     }
 
-}
+    public HashMap<Integer, Queue> getRrReadyQueues() {
+        return rrReadyQueues;
+    }
 
+}

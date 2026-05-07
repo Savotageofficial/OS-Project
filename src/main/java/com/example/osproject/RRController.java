@@ -30,7 +30,8 @@ public class RRController {
         process[] rr = algoEval.getRrProcesses();
         RR round = new RR();
         HashMap<Integer, Queue> hashMap= new HashMap<>();
-        round.RR(processes.toArray(new process[0]), quantum,hashMap);
+        process[] copies = processes.stream().map(process::copy).toArray(process[]::new);
+        round.RR(copies, quantum, hashMap);
         List<process> executionOrder = round.getExecutionOrder();
         HashMap<Integer, Integer> durations = round.getExecutionDurations();
         HashMap<Integer, process> timeLine = round.getExecutionTimeline();

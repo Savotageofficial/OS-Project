@@ -30,7 +30,10 @@ public class SJF {
     }
 
     public void Run(){
-        this.reset();
+        for (process p : processes) {
+            p.reset();
+        }
+
 
         int n = processes.length;
 
