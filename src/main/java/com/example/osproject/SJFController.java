@@ -2,10 +2,13 @@ package com.example.osproject;
 import com.example.osproject.SJF;
 import com.example.osproject.process;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.collections.*;
+import javafx.scene.control.OverrunStyle;
 
 import java.util.List;
 
@@ -16,7 +19,7 @@ public class  SJFController {
     @FXML private TableColumn<process , Integer> tatCol;
     @FXML private TableColumn<process , Integer> rtCol;
 
-    @FXML private HBox ganttBox;
+    @FXML private VBox ganttBox;
 
     @FXML private Label avgWT;
     @FXML private Label avgTAT;
@@ -66,10 +69,10 @@ private void fillTable(process[]processes){
          data.add(p);}
      table.setItems(data);
 
-     table.setFixedCellSize(30);
-     table.prefHeightProperty().bind(
-             table.fixedCellSizeProperty().multiply(
-                     javafx.beans.binding.Bindings.size(table.getItems()).add(1)
+     table.setFixedCellSize(40);
+    table.prefHeightProperty().bind(
+            table.fixedCellSizeProperty().multiply(
+                   javafx.beans.binding.Bindings.size(table.getItems()).add(1)
              ));
 
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);}
@@ -84,19 +87,69 @@ private void fillTable(process[]processes){
              totalRT += p.getResponsetime();
          }
          int n = processes.length;
-         avgWT.setText("Average WT= " + totalWT + "/" + n + "=" + (totalWT / n));
-         avgTAT.setText("Average TAT= " + totalTAT + "/" + n + "=" + (totalTAT / n));
-         avgRT.setText("Average RT= " + totalRT + "/" + n + "=" + (totalRT / n));
+         avgWT.setText("Average WT= " + totalWT + "/" + n + "=" + String.format("%.3f",totalWT / n));
+         avgTAT.setText("Average TAT= " + totalTAT + "/" + n + "=" + String.format ("%.3f",totalTAT / n));
+         avgRT.setText("Average RT= " + totalRT + "/" + n + "=" +  String.format("%.3f",totalRT / n));
      }
      private void drawGanttChart(process[] processes){
 
-        ganttBox.getChildren().clear();
-        for (process p:processes){
-            Label block =new Label("p"+p.pid());
-            block.getStyleClass().add("gantt-block");
-            ganttBox.getChildren().add(block);
-        }
+             ganttBox.getChildren().clear();
+
+             VBox container = new VBox(5);
+             container.setAlignment(Pos.CENTER);
+
+             HBox blocks = new HBox(0);
+             blocks.setAlignment(Pos.CENTER);
+
+             HBox times = new HBox(0);
+             times.setAlignment(Pos.CENTER);
+
+             int currentTime = processes[0].getArrivaltime();
+            int scale= 15;
+
+             Label start = new Label(String.valueOf(currentTime));
+             start.setMinWidth(0);
+             times.getChildren().add(start);
+             start.getStyleClass().add("gantt-time");
+
+             for (process p : processes) {
+                 int width=p.getBursttime()*scale;
+
+
+                 Label block = new Label("P" + p.pid());
+                 block.getStyleClass().add("gantt-block");
+                 int finalWidth=Math.max(width,60);
+                 block.setMinWidth(finalWidth);
+                 block.setMaxWidth(finalWidth);
+                 block.setPrefWidth(finalWidth);
+                  block.setTextOverrun(OverrunStyle.CLIP);
+                 blocks.getChildren().add(block);
+
+                 currentTime += p.getBursttime();
+
+                 Label t = new Label(String.valueOf(currentTime));
+                 t.setMinWidth(width);
+                 t.setMaxWidth(width);
+                 t.getStyleClass().add("gantt-time");
+                 t.setAlignment(Pos.CENTER_RIGHT);
+
+                 times.getChildren().add(t);
+             }
+
+             container.getChildren().addAll(blocks, times);
+             ganttBox.getChildren().add(container);
+         }
+
+     @FXML public void goToInput(javafx.event.ActionEvent e)throws  java.io.IOException{
+         SceneSwitcher.getInstance().switchToInputScene(e);
      }
+    @FXML public void goToRR(javafx.event.ActionEvent e)throws  java.io.IOException{
+         SceneSwitcher.getInstance().switchToRRScene(e);
+    }
+    @FXML public void goToComparison(javafx.event.ActionEvent e)throws  java.io.IOException{
+        SceneSwitcher.getInstance().switchToComparisonScene(e);
+    }
+
 }
 
 
