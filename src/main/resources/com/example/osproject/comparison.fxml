@@ -20,13 +20,8 @@
             </columns>
 
         </TableView>
-        <HBox fx:id="rq" layoutX="160.0" layoutY="301.0" prefHeight="60" prefWidth="360" spacing="5" style="-fx-border-color: #5ad9bb; -fx-padding: 5;">
-         <children>
-             <Label fx:id="p1" alignment="CENTER" prefHeight="49.0" prefWidth="87.0" style="-fx-background-color: red;" />
-             <Label fx:id="p2" alignment="CENTER" prefHeight="53.0" prefWidth="86.0" style="-fx-background-color: white;" />
-             <Label fx:id="p3" alignment="CENTER" prefHeight="52.0" prefWidth="85.0" style="-fx-background-color: blue;" />
-             <Label fx:id="p4" alignment="CENTER" prefHeight="59.0" prefWidth="84.0" style="-fx-background-color: yellow;" />
-         </children></HBox>
+        <HBox fx:id="rq" alignment="CENTER" layoutX="160.0" layoutY="301.0" prefHeight="60" prefWidth="360" spacing="5" style="-fx-border-color: #5ad9bb; -fx-padding: 5;">
+        </HBox>
         <Label fx:id="ti" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="257.0" prefHeight="18.0" prefWidth="277.0" text="Round Robin Ready Queue" textAlignment="CENTER" textFill="#efdede">
             <font>
                 <Font name="System Bold" size="13.0" />
@@ -45,13 +40,13 @@
 
             <children>
 
-                <VBox alignment="CENTER" prefHeight="180" prefWidth="280" spacing="12" style="-fx-background-color: #1e3c3a;                 -fx-padding: 15;                 -fx-background-radius: 12;                 -fx-border-radius: 12;                 -fx-border-color: #5ad9bb;                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 12, 0.3, 0, 3);">
+                <VBox alignment="CENTER" prefHeight="180" prefWidth="280" spacing="12" style="-fx-background-color: #1e3c3a; -fx-padding: 15; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #5ad9bb; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 12, 0.3, 0, 3);">
 
-                    <Label style="-fx-text-fill: white;                     -fx-font-size: 14px;                     -fx-font-weight: bold;" text="Comparison Result" />
+                    <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Comparison Result" />
 
-                    <Label fx:id="resultt" alignment="CENTER" maxWidth="240" style="-fx-text-fill: #e0fff7;                     -fx-font-size: 13px; " textAlignment="CENTER" wrapText="true" />
+                    <Label fx:id="resultt" alignment="CENTER" maxWidth="240" style="-fx-text-fill: #e0fff7; -fx-font-size: 13px; " textAlignment="CENTER" wrapText="true" />
 
-                    <Button onAction="#closeOverlay" style="-fx-background-color: #5ad9bb;                     -fx-text-fill: black;" text="Close" />
+                    <Button onAction="#closeOverlay" style="-fx-background-color: #5ad9bb; -fx-text-fill: black;" text="Close" />
 
                 </VBox>
 

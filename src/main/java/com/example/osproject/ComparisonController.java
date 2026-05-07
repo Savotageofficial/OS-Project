@@ -13,18 +13,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import javafx.geometry.Pos;
 
 public class ComparisonController implements Initializable {
 
@@ -50,29 +49,24 @@ public class ComparisonController implements Initializable {
     private Label ti;
     @FXML
     private Label time;
-    public void updateTime(int t) {
-        time.setText("T = " + t);
-    }
     @FXML
-    private Label p1;
-    @FXML
-    private Label p2;
-    @FXML
-    private Label p3;
-    @FXML
-    private Label p4;
-
+    private HBox rq;
 
     @FXML
     private StackPane overlay;
     private List<process> processes;
+    private List<Integer> timeSteps;
+    private int currentTimeIndex = 0;
+    private HashMap<Integer, Queue> rrReadyQueues;
     SceneSwitcher s = SceneSwitcher.getInstance();
     private List<List<String>> queueSteps = new ArrayList<>();
     private int currentStep = 0;
+
     @FXML
     public void next() {
 
-        if (queueSteps == null || queueSteps.isEmpty()) return;
+        if (queueSteps == null || queueSteps.isEmpty())
+            return;
 
         if (currentStep < queueSteps.size() - 1) {
             currentStep++;
@@ -83,7 +77,8 @@ public class ComparisonController implements Initializable {
     @FXML
     public void prev() {
 
-        if (queueSteps == null || queueSteps.isEmpty()) return;
+        if (queueSteps == null || queueSteps.isEmpty())
+            return;
 
         if (currentStep > 0) {
             currentStep--;
@@ -108,13 +103,11 @@ public class ComparisonController implements Initializable {
 
     }
 
-
     public void setData(List<process> processes) {
 
         this.processes = processes;
         int q = s.getQuantum();
         AlgoEval eval = new AlgoEval(processes, q);
-
 
         ObservableList<CompareRow> list = FXCollections.observableArrayList();
         list.add(new CompareRow("WT", eval.getRrAvgWT(), eval.getSrtfAvgWT()));
@@ -122,23 +115,34 @@ public class ComparisonController implements Initializable {
         list.add(new CompareRow("RT", eval.getRrAvgRT(), eval.getSrtfAvgRT()));
 
         table.setItems(list);
+        rrReadyQueues = eval.getRrReadyQueues();
         buildQueue();
         showStep(0);
     }
+
     private void buildQueue() {
 
         queueSteps.clear();
+        timeSteps = new ArrayList<>();
 
-        for (int i = 0; i < processes.size(); i++) {
+        if (rrReadyQueues == null || rrReadyQueues.isEmpty())
+            return;
+
+        timeSteps = new ArrayList<>(rrReadyQueues.keySet());
+        Collections.sort(timeSteps);
+
+        for (int t : timeSteps) {
             List<String> step = new ArrayList<>();
-            for (int j = 0; j <= i; j++) {
-                step.add("P" + processes.get(j).getPid());
+            Queue queue = rrReadyQueues.get(t);
+            if (queue != null) {
+                for (Object pid : queue) {
+                    step.add("P" + pid);
+                }
             }
             queueSteps.add(step);
         }
-
-
     }
+
     private void showStep(int step) {
         if (queueSteps.isEmpty())
             return;
@@ -146,16 +150,30 @@ public class ComparisonController implements Initializable {
             return;
 
         List<String> q = queueSteps.get(step);
-        Label[] panes = {p1, p2, p3, p4};
-        for (Label p : panes) {
-            p.setText("");
-        }
+        rq.getChildren().clear();
 
-        for (int i = 0; i < q.size() && i < panes.length; i++) {
-            panes[i].setText(q.get(i));
+        if (q.isEmpty()) {
+            Label empty = new Label("Empty");
+            empty.setStyle("-fx-text-fill: #9ca3af; -fx-font-style: italic;");
+            rq.getChildren().add(empty);
+        } else {
+            for (String name : q) {
+                Label pLabel = new Label(name);
+                pLabel.setPrefSize(45, 45);
+                pLabel.setAlignment(Pos.CENTER);
+                pLabel.setStyle(
+                        "-fx-background-color: #3b82f6;" +
+                                "-fx-text-fill: white;" +
+                                "-fx-font-weight: bold;" +
+                                "-fx-background-radius: 5;");
+                rq.getChildren().add(pLabel);
+            }
         }
+        int actualTime = (timeSteps != null && step < timeSteps.size()) ? timeSteps.get(step) : step;
+        time.setText("T = " + actualTime);
 
-        time.setText("T = " + step);
+        pr.setDisable(currentStep == 0);
+        ne.setDisable(currentStep >= queueSteps.size() - 1);
     }
 
     @FXML
