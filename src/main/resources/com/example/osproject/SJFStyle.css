@@ -1,0 +1,72 @@
+
+.root {
+    -fx-background-color:white;
+}
+
+.title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.tag {
+    -fx-background-color: skyblue;
+    -fx-text-fill: #052337;
+    -fx-padding: 5 12;
+    -fx-background-radius: 10;
+}
+
+
+.gantt-block {
+    -fx-background-color: skyblue;
+    -fx-padding: 8 15;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: #d1d5db;
+}
+
+.table-view {
+    -fx-background-color: #5984a1;
+    -fx-border-color: #6c82af;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+
+.table-view .column-header-background {
+   -fx-background-color: #25324c;
+}
+
+.table-view .column-header {
+    -fx-alignment: CENTER;
+    -fx-background-color:skyblue;
+    -fx-font-weight: bold;
+}
+
+
+.table-view .cell {
+    -fx-alignment: CENTER;
+    -fx-padding: 8;
+    -fx-text-fill: #2c7da0;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.nav-btn {
+    -fx-background-color: skyblue;
+    -fx-text-fill: #1f3a4c;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 6 15;
+    -fx-background-radius: 15;
+    -fx-cursor: hand;
+}
+
+.nav-btn:hover {
+    -fx-background-color: #14527a;
+}
+
+.nav-btn:pressed {
+    -fx-background-color: #37607a;
+}
+
