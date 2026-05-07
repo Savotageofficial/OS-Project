@@ -19,5 +19,49 @@
             </font></Label>
         </HBox>
     </top>
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="15">
 
+
+            <Label text="Gantt Chart" textFill="#4193ae">
+                <font>
+                    <Font name="Bodoni MT Bold" size="23.0" />
+                </font></Label>
+
+            <VBox fx:id="ganttBox" alignment="CENTER" spacing="5" fillWidth="true"/>
+
+
+            <TableView fx:id="table"  maxWidth="Infinity" >
+                <columns>
+                    <TableColumn fx:id="pidCol" text="PID" />
+                    <TableColumn fx:id="wtCol" text="WT" />
+                    <TableColumn fx:id="tatCol" text="TAT" />
+                    <TableColumn fx:id="rtCol" text="RT" />
+                </columns>
+            </TableView>
+            <HBox alignment="CENTER" spacing="20">
+                <Label fx:id="avgWT" text="Average WT: -" textFill="#2f74b9" maxWidth="Infinity" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="System Italic" size="16.0" />
+                    </font></Label>
+                <Label fx:id="avgTAT" text="Average TAT: -" textFill="#2f74b9" maxWidth="Infinity" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="16.0" />
+                    </font></Label>
+                <Label fx:id="avgRT" text="Average RT: -" textFill="#2f74b9" maxWidth="Infinity" HBox.hgrow="ALWAYS" textAlignment="CENTER">
+                    <font>
+                        <Font size="16.0" />
+                    </font></Label>
+            </HBox>
+
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <padding> <Insets bottom="30" right="30"/> </padding>
+            <Button onAction="#goToInput" styleClass="nav-btn" text="Input" />
+            <Button onAction="#goToRR" styleClass="nav-btn" text="RR" />
+            <Button onAction="#goToComparison" styleClass="nav-btn" text="Comparison" />
+        </HBox>
+    </bottom>
 </BorderPane>
