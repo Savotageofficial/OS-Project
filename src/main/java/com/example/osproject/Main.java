@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -24,6 +26,24 @@ public class Main extends Application {
         stage.setWidth(680);
         stage.setResizable(false);
         stage.show();
+
+        stage.setOnCloseRequest(Event ->{
+            Event.consume();
+            logOut(stage);
+        });
+    }
+    public void logOut (Stage stage){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+
+        alert.setTitle("Logout");
+        alert.setHeaderText("you're about logout!");
+        alert.setContentText("do you want to save before exiting?");
+        alert.getButtonTypes().addAll( ButtonType.CANCEL);
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            System.out.println("you successfully logged out!");
+            stage.close();
+        }
     }
 
     public static void main(String[] args) {
