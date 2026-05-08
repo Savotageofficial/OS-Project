@@ -41,18 +41,25 @@ public class ComparisonController implements Initializable {
 
     @FXML
     private Label resultt;
+
     @FXML
     private Button pr;
+
     @FXML
     private Button ne;
+
     @FXML
     private Label ti;
+
     @FXML
     private Label time;
+
     @FXML
     private HBox rq;
+
     @FXML
     private Button rb;
+
     @FXML
     private Button sb;
 
@@ -107,17 +114,17 @@ public class ComparisonController implements Initializable {
         SceneSwitcher.getInstance().switchToRRScene(e);
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         met.setCellValueFactory(new PropertyValueFactory<>("metric"));
         rr.setCellValueFactory(new PropertyValueFactory<>("rr"));
         sjf.setCellValueFactory(new PropertyValueFactory<>("srtf"));
-
         overlay.setVisible(false);
     }
-    public void setData(List<process> processes) {
 
+
+    public void setData(List<process> processes) {
         this.processes = processes;
         int q = s.getQuantum();
         AlgoEval eval = new AlgoEval(processes, q);
@@ -126,23 +133,21 @@ public class ComparisonController implements Initializable {
         list.add(new CompareRow("WT", eval.getRrAvgWT(), eval.getSrtfAvgWT()));
         list.add(new CompareRow("TAT", eval.getRrAvgTAT(), eval.getSrtfAvgTAT()));
         list.add(new CompareRow("RT", eval.getRrAvgRT(), eval.getSrtfAvgRT()));
-
         table.setItems(list);
         rrReadyQueues = eval.getRrReadyQueues();
         buildQueue();
         showStep(0);
     }
 
-    private void buildQueue() {
 
+    private void buildQueue() {
         queueSteps.clear();
         timeSteps = new ArrayList<>();
-
         if (rrReadyQueues == null || rrReadyQueues.isEmpty())
             return;
-
         timeSteps = new ArrayList<>(rrReadyQueues.keySet());
         Collections.sort(timeSteps);
+
 
         for (int t : timeSteps) {
             List<String> step = new ArrayList<>();
@@ -155,20 +160,21 @@ public class ComparisonController implements Initializable {
             queueSteps.add(step);
         }
     }
+
+
     private void showStep(int step) {
         if (queueSteps.isEmpty())
             return;
         if (step < 0 || step >= queueSteps.size())
             return;
-
         List<String> q = queueSteps.get(step);
         rq.getChildren().clear();
-
         if (q.isEmpty()) {
             Label empty = new Label("Empty");
             empty.setStyle("-fx-text-fill: #9ca3af; -fx-font-style: italic;");
             rq.getChildren().add(empty);
-        } else {
+        }
+        else {
             for (String name : q) {
                 Label pLabel = new Label(name);
                 pLabel.setPrefSize(45, 45);
@@ -181,25 +187,24 @@ public class ComparisonController implements Initializable {
                 rq.getChildren().add(pLabel);
             }
         }
+
+
         int actualTime = (timeSteps != null && step < timeSteps.size()) ? timeSteps.get(step) : step;
         time.setText("T = " + actualTime);
-
         pr.setDisable(currentStep == 0);
         ne.setDisable(currentStep >= queueSteps.size() - 1);
     }
 
+
     @FXML
     public void result() {
-
         if (processes == null || processes.isEmpty()) {
             resultt.setText("No processes available!");
             overlay.setVisible(true);
             return;
         }
         int q = s.getQuantum();
-
         AlgoEval eval = new AlgoEval(processes, q);
-
         resultt.setText(eval.getConclusion());
         overlay.setOpacity(0);
         overlay.setVisible(true);
@@ -208,6 +213,7 @@ public class ComparisonController implements Initializable {
         ft.setToValue(1);
         ft.play();
     }
+
 
     @FXML
     public void closeOverlay() {
