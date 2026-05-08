@@ -25,7 +25,7 @@
                    onMouseClicked="#setRandomValues"
                    style="-fx-text-fill: #3b82f6; -fx-font-size: 11px;">
                <VBox.margin>
-                  <Insets top="-10.0" left="5.0" bottom="-20" right="-60"/>
+                  <Insets top="-2.0" left="5.0" bottom="-8" right="-60"/>
                </VBox.margin>
             </Label>
             <Label fx:id="L4">
@@ -65,12 +65,12 @@
       </VBox>
    </left>
    <right>
-      <VBox prefHeight="442.0" prefWidth="275.0" spacing="15.0" styleClass="right-pane">
+      <VBox prefHeight="442.0" prefWidth="275.0" spacing="10.0" styleClass="right-pane">
       <TableView fx:id="table" prefHeight="221.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn fx:id="PID" prefWidth="63.20001220703125" text="PID" />
-            <TableColumn fx:id="AT" minWidth="0.0" prefWidth="91.79998779296875" text="Arrival time" />
-            <TableColumn fx:id="BT" prefWidth="93.0" text="Brust time" />
+            <TableColumn fx:id="PID" prefWidth="64" text="PID" />
+            <TableColumn fx:id="AT" minWidth="0.0" prefWidth="90" text="Arrival time" />
+            <TableColumn fx:id="BT" prefWidth="90" text="Brust time" />
          </columns>
          <BorderPane.margin>
             <Insets bottom="170.0" left="100.0" right="50.0" top="90.0" />
