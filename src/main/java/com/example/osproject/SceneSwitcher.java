@@ -81,6 +81,7 @@ public class SceneSwitcher {
         stage.setScene(scene);
         stage.setWidth(680);
         stage.setHeight(500);
+        stage.centerOnScreen();
         stage.show();
     }
     public void switchToComparisonScene(ActionEvent e) throws IOException {
