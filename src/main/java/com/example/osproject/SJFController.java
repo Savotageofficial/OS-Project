@@ -1,15 +1,17 @@
 package com.example.osproject;
-import com.example.osproject.SJF;
-import com.example.osproject.process;
+import com.example.osproject.Algorithms.SJF;
+import com.example.osproject.Models.process;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.collections.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.control.OverrunStyle;
-import javafx.scene.layout.FlowPane;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +23,7 @@ public class  SJFController {
     @FXML private TableColumn<process , Integer> tatCol;
     @FXML private TableColumn<process , Integer> rtCol;
 
-    @FXML private FlowPane ganttBox;
+    @FXML private VBox ganttBox;
 
     @FXML private Label avgWT;
     @FXML private Label avgTAT;
@@ -169,24 +171,16 @@ private void fillTable(process[]processes){
     }
 
 
-    @FXML
-    public void goToInput(ActionEvent e) throws IOException {
-
-        SceneSwitcher.getInstance().switchToInputScene(e);
-    }
-
-
-    @FXML
-    public void goToRR(ActionEvent e) throws IOException {
-
+     @FXML public void goToInput(javafx.event.ActionEvent e)throws  java.io.IOException{
+         SceneSwitcher.getInstance().switchToInputScene(e);
+     }
+    @FXML public void goToRR(ActionEvent e)throws  IOException{
         if (SceneSwitcher.getInstance().getQuantum() <= 0) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
 
             alert.setTitle("Warning");
-
             alert.setHeaderText("Missing Quantum");
-
             alert.setContentText("Please enter Quantum first!");
 
             alert.getDialogPane().getStylesheets().add(
@@ -199,22 +193,15 @@ private void fillTable(process[]processes){
 
             return;
         }
-
-        SceneSwitcher.getInstance().switchToRRScene(e);
+         SceneSwitcher.getInstance().switchToRRScene(e);
     }
-
-
-    @FXML
-    public void goToComparison(ActionEvent e) throws IOException {
-
+    @FXML public void goToComparison(javafx.event.ActionEvent e)throws  java.io.IOException{
         if (SceneSwitcher.getInstance().getQuantum() <= 0) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
 
             alert.setTitle("Warning");
-
             alert.setHeaderText("Missing Quantum");
-
             alert.setContentText("Please enter Quantum first!");
 
             alert.getDialogPane().getStylesheets().add(
@@ -229,5 +216,8 @@ private void fillTable(process[]processes){
         }
 
         SceneSwitcher.getInstance().switchToComparisonScene(e);
-    }}
+    }
+
+}
+
 

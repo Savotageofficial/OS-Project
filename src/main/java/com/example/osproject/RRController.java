@@ -1,5 +1,8 @@
 package com.example.osproject;
 
+import com.example.osproject.Algorithms.RR;
+import com.example.osproject.Models.AlgoEval;
+import com.example.osproject.Models.process;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -12,7 +15,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;

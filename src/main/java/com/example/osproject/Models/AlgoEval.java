@@ -1,4 +1,7 @@
-package com.example.osproject;
+package com.example.osproject.Models;
+
+import com.example.osproject.Algorithms.RR;
+import com.example.osproject.Algorithms.SJF;
 
 import java.util.*;
 
