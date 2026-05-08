@@ -78,7 +78,6 @@ public class RRController {
         int currentTime = timeline.keySet().stream().min(Integer::compare).orElse(0);
         for (process p : executionOrder) {
             int duration = durations.getOrDefault(currentTime, 1);
-
             Label block = new Label("P" + p.pid());
             Label timeLabel = new Label(String.valueOf(currentTime));
             VBox cell = new VBox();
@@ -92,8 +91,16 @@ public class RRController {
             ganttBox.getChildren().add(cell);
             currentTime += duration;
         }
+        Label blockF = new Label("");
         Label finalTime = new Label(String.valueOf(currentTime));
-        ganttBox.getChildren().add(finalTime);
+        VBox cell = new VBox();
+
+        blockF.setPrefHeight(31);
+        finalTime.setPrefWidth(blockF.getPrefWidth());
+        finalTime.setAlignment(Pos.TOP_LEFT);
+        cell.getChildren().addAll(blockF, finalTime);
+
+        ganttBox.getChildren().add(cell);
     }
     @FXML
     public void goToInput(ActionEvent e) throws IOException {
