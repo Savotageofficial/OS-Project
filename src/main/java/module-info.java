@@ -14,4 +14,8 @@ module com.example.osproject {
 
     opens com.example.osproject to javafx.fxml;
     exports com.example.osproject;
+    exports com.example.osproject.Algorithms;
+    opens com.example.osproject.Algorithms to javafx.fxml;
+    exports com.example.osproject.Models;
+    opens com.example.osproject.Models to javafx.fxml;
 }

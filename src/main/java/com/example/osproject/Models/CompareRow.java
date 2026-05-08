@@ -1,4 +1,4 @@
-package com.example.osproject;
+package com.example.osproject.Models;
 
 public class CompareRow {
 

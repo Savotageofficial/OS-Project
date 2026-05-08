@@ -1,4 +1,6 @@
-package com.example.osproject;
+package com.example.osproject.Algorithms;
+
+import com.example.osproject.Models.process;
 
 import java.util.ArrayList;
 import java.util.Arrays;
