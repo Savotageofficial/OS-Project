@@ -92,55 +92,59 @@ public class InputController implements Initializable {
     SceneSwitcher s = SceneSwitcher.getInstance();
 
     public void goToRR(ActionEvent e) throws IOException {
-        try{
+        try {
             resetError();
-            SceneSwitcher.getInstance().setProcesses(processes);
             if (!hasProcesses()) return;
-            if(quantum.getText().isEmpty()){
+
+            if (quantum.getText().isEmpty()) {
                 L.setText("You Must enter Quantum Number");
+                return;
             }
-            else{
             int q = Integer.parseInt(quantum.getText());
-            if(q<=0){
+
+            if (q <= 0) {
                 L4.setText("Invalid value");
                 return;
             }
-            s.setProcesses(processes);
-            s.setQuantum(q);
-            s.switchToRRScene(e);
-            }
-        }catch (NumberFormatException ex){
-            L.setText("enter valid value");
+            SceneSwitcher.getInstance().setProcesses(processes);
+            SceneSwitcher.getInstance().setQuantum(q);
+            SceneSwitcher.getInstance().switchToRRScene(e);
+
+        } catch (NumberFormatException ex) {
+            L.setText("Enter valid value");
+        }
+    }
+    public void goToSJF(ActionEvent e) throws IOException {
+        try {
+            resetError();
+            if (!hasProcesses()) return;
+            int q = quantum.getText().isEmpty() ? 0 : Integer.parseInt(quantum.getText());
+            SceneSwitcher.getInstance().setProcesses(processes);
+            SceneSwitcher.getInstance().setQuantum(q);
+            SceneSwitcher.getInstance().switchToSJFScene(e);
+        } catch (NumberFormatException ex) {
+            L.setText("Enter valid value");
         }
     }
 
-    public void goToSJF(ActionEvent e) throws IOException {
-        if (!hasProcesses()) return;
-        SceneSwitcher.getInstance().setProcesses(processes);
-        s.setProcesses(processes);
-        s.setQuantum(quantum.getText().isEmpty() ? 0 : Integer.parseInt(quantum.getText()));
-        s.switchToSJFScene(e);
-    }
     public void goToComparison(ActionEvent e) throws IOException {
-        try{
+        try {
             resetError();
-            SceneSwitcher.getInstance().setProcesses(processes);
             if (!hasProcesses()) return;
-            if(quantum.getText().isEmpty()){
+            if (quantum.getText().isEmpty()) {
                 L.setText("You Must enter Quantum Number");
+                return;
             }
-            else{
-                int q = Integer.parseInt(quantum.getText());
-                if(q<=0){
-                    L4.setText("Invalid value");
-                    return;
-                }
-                s.setProcesses(processes);
-                s.setQuantum(q);
-                s.switchToComparisonScene(e);
+            int q = Integer.parseInt(quantum.getText());
+            if (q <= 0) {
+                L4.setText("Invalid value");
+                return;
             }
-        }catch (NumberFormatException ex){
-            L.setText("enter valid value");
+            SceneSwitcher.getInstance().setProcesses(processes);
+            SceneSwitcher.getInstance().setQuantum(q);
+            SceneSwitcher.getInstance().switchToComparisonScene(e);
+        } catch (NumberFormatException ex) {
+            L.setText("Enter valid value");
         }
     }
 
