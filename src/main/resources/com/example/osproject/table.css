@@ -11,7 +11,7 @@
 }
 
 .table-view .column-header{
-    -fx-background-color: #488dac;
+    -fx-background-color: #60a5fa;
 }
 
 .table-view .column-header-background .label{
@@ -97,6 +97,20 @@
     -fx-font-weight: bold;
     -fx-font-size: 15px;
 
+
+}
+#arrow1{
+    -fx-font-size: 55px;
+    -fx-text-fill: #39c7ff;
+    -fx-effect: dropshadow(gaussian,
+    rgba(57,199,255,0.7),15,0.5,0,0);
+
+}
+#arrow2{
+    -fx-font-size: 55px;
+    -fx-text-fill: #39c7ff;
+    -fx-effect: dropshadow(gaussian,
+    rgba(57,199,255,0.7),15,0.5,0,0);
 
 }
 
