@@ -1,67 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="500.0" prefWidth="680.0" stylesheets="/com/example/osproject/SJFStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.SJFController">
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="10">
-            <Label styleClass="title" text="Output:" textFill="#175266">
+<AnchorPane fx:id="Anchor1" prefHeight="500.0" prefWidth="680.0" stylesheets="/com/example/osproject/SJFStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.SJFController">
+
+    <children>
+        <Label layoutX="35.0" layoutY="15.0" styleClass="tag" text="SJF">
+
             <font>
-               <Font name="System Bold Italic" size="23.0" />
-            </font></Label>
-            <Region HBox.hgrow="ALWAYS" />
-            <Label styleClass="tag" text="SJF">
-            <font>
-               <Font size="17.0" />
-            </font></Label>
-        </HBox>
-    </top>
-    <center>
-        <VBox alignment="TOP_CENTER" spacing="15">
+                <Font size="28.0" />
+            </font>
 
+        </Label>
+        <AnchorPane layoutY="70.0" prefHeight="120.0" prefWidth="680.0">
 
-            <Label text="Gantt Chart" textFill="#1d4ed8">
-                <font>
-                    <Font name="Bodoni MT Bold Italic" size="26.0" />
-                </font></Label>
+            <children>
 
-            <VBox fx:id="ganttBox" alignment="CENTER" fillWidth="true" spacing="5" />
+                <Label layoutX="270.0" layoutY="5.0" text="Gantt Chart" textFill="#1d4ed8">
 
-
-            <TableView fx:id="table" maxWidth="Infinity">
-                <columns>
-                    <TableColumn fx:id="pidCol" text="PID" />
-                    <TableColumn fx:id="wtCol" text="WT" />
-                    <TableColumn fx:id="tatCol" text="TAT" />
-                    <TableColumn fx:id="rtCol" text="RT" />
-                </columns>
-            </TableView>
-            <HBox alignment="CENTER" spacing="20">
-                <Label fx:id="avgWT" maxWidth="Infinity" text="Average WT: -" textAlignment="CENTER" textFill="#2f74b9" HBox.hgrow="ALWAYS">
                     <font>
-                        <Font name="System Italic" size="16.0" />
-                    </font></Label>
-                <Label fx:id="avgTAT" maxWidth="Infinity" text="Average TAT: -" textAlignment="CENTER" textFill="#2f74b9" HBox.hgrow="ALWAYS">
-                    <font>
-                        <Font size="16.0" />
-                    </font></Label>
-                <Label fx:id="avgRT" maxWidth="Infinity" text="Average RT: -" textAlignment="CENTER" textFill="#2f74b9" HBox.hgrow="ALWAYS">
-                    <font>
-                        <Font size="16.0" />
-                    </font></Label>
-            </HBox>
+                        <Font name="Arial Rounded MT Bold" size="24.0" />
+                    </font>
 
-        </VBox>
-    </center>
-    <bottom>
-        <HBox alignment="CENTER_RIGHT" spacing="10">
-            <padding> <Insets bottom="30" right="30" /> </padding>
-            <Button onAction="#goToInput" styleClass="nav-btn" text="Input" />
-            <Button onAction="#goToRR" styleClass="nav-btn" text="RR" />
-            <Button onAction="#goToComparison" styleClass="nav-btn" text="Comparison" />
-        </HBox>
-    </bottom>
-</BorderPane>
+                </Label>
+
+                <HBox alignment="CENTER" layoutY="40.0" prefHeight="80.0" prefWidth="680.0">
+
+                    <children>
+
+                        <FlowPane fx:id="ganttBox" hgap="0" prefHeight="80.0" prefWidth="620.0" vgap="0" />
+
+                    </children>
+
+                </HBox>
+
+            </children>
+
+        </AnchorPane>
+        <AnchorPane layoutY="190.0" prefHeight="260.0" prefWidth="680.0">
+
+            <children>
+
+                <VBox layoutX="40.0" prefWidth="600.0" spacing="10">
+
+                    <children>
+
+                        <TableView fx:id="table" prefHeight="220.0" prefWidth="600.0">
+
+                            <columns>
+                                <TableColumn fx:id="pidCol" text="PID" />
+                                <TableColumn fx:id="wtCol" text="WT" />
+                                <TableColumn fx:id="tatCol" text="TAT" />
+                                <TableColumn fx:id="rtCol" text="RT" />
+
+                            </columns>
+
+                        </TableView>
+
+                        <HBox alignment="CENTER" spacing="35">
+
+                            <children>
+
+                                <Label fx:id="avgWT" text="Average WT: -" />
+
+                                <Label fx:id="avgTAT" text="Average TAT: -" />
+
+                                <Label fx:id="avgRT" text="Average RT: -" />
+
+                            </children>
+
+                        </HBox>
+
+                    </children>
+
+                </VBox>
+
+            </children>
+
+        </AnchorPane>
+        <Button layoutX="470.0" layoutY="20.0" onAction="#goToInput" styleClass="nav-btn" text="Input" />
+
+        <Button layoutX="540.0" layoutY="20.0" onAction="#goToRR" styleClass="nav-btn" text="RR" />
+
+        <Button layoutX="590.0" layoutY="20.0" onAction="#goToComparison" styleClass="nav-btn" text="CT&amp;RQ">
+
+        </Button>
+
+    </children>
+
+</AnchorPane>
