@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -89,6 +90,15 @@ public class InputController implements Initializable {
             return false;
         }
         return true;
+    }
+    public void setRandomValues() {
+        Random rand = new Random();
+
+        int arr = rand.nextInt(10);
+        int bur = rand.nextInt(9) + 1;
+
+        arrival.setText(String.valueOf(arr));
+        burst.setText(String.valueOf(bur));
     }
     SceneSwitcher s = SceneSwitcher.getInstance();
 
