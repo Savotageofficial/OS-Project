@@ -1,6 +1,6 @@
 package com.example.osproject;
-import com.example.osproject.SJF;
-import com.example.osproject.process;
+import com.example.osproject.Algorithms.SJF;
+import com.example.osproject.Models.process;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -22,7 +22,7 @@ public class  SJFController {
     @FXML private TableColumn<process , Integer> tatCol;
     @FXML private TableColumn<process , Integer> rtCol;
 
-    @FXML private FlowPane ganttBox;
+    @FXML private VBox ganttBox;
 
     @FXML private Label avgWT;
     @FXML private Label avgTAT;
