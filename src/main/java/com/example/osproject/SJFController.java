@@ -6,12 +6,11 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.collections.*;
-import javafx.scene.layout.Pane;
 import javafx.scene.control.OverrunStyle;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.control.ContentDisplay;
 
 import java.io.IOException;
 import java.util.List;
@@ -97,90 +96,112 @@ private void fillTable(process[]processes){
      }
     private void drawGanttChart(process[] processes) {
 
-        ganttBox.getChildren().clear();
 
-        VBox container = new VBox(5);
-        container.setAlignment(Pos.CENTER);
+            ganttBox.getChildren().clear();
 
+            VBox container = new VBox(5);
+            container.setAlignment(Pos.CENTER);
 
-        HBox blocks = new HBox(0);
-        blocks.setAlignment(Pos.CENTER);
+            HBox blocks = new HBox(0);
+            blocks.setAlignment(Pos.CENTER);
 
-        int scale = 15;
+            int scale = 15;
+            int minimumWidth = 35;
 
-        for (process p : processes) {
+            for (process p : processes) {
 
-            int width = p.getBursttime() * scale;
+                int width = Math.max(p.getBursttime() * scale, minimumWidth);
 
-            Label block = new Label("P" + p.pid());
+                Label block = new Label("P" + p.pid());
 
-            block.getStyleClass().add("gantt-block");
+                block.getStyleClass().add("gantt-block");
 
-            block.setPrefWidth(width);
-            block.setMinWidth(width);
-            block.setMaxWidth(width);
+                block.setPrefWidth(width);
+                block.setMinWidth(width);
+                block.setMaxWidth(width);
 
-            block.setAlignment(Pos.CENTER);
+                block.setPrefHeight(40);
 
-            blocks.getChildren().add(block);
+                block.setAlignment(Pos.CENTER);
+
+                block.setContentDisplay(ContentDisplay.CENTER);
+
+                block.setEllipsisString("");
+
+                blocks.getChildren().add(block);
+            }
+
+            Pane times = new Pane();
+
+            times.setPrefHeight(30);
+
+            int currentTime = processes[0].getArrivaltime();
+
+            int position = 0;
+
+            Label start = new Label(String.valueOf(currentTime));
+
+            start.setLayoutX(0);
+
+            start.setLayoutY(0);
+
+            start.getStyleClass().add("gantt-time");
+
+            times.getChildren().add(start);
+
+            for (process p : processes) {
+
+                int width = Math.max(p.getBursttime() * scale, minimumWidth);
+
+                position += width;
+
+                currentTime += p.getBursttime();
+
+                Label t = new Label(String.valueOf(currentTime));
+
+                t.setLayoutX(position - 12);
+
+                t.setLayoutY(0);
+
+                t.getStyleClass().add("gantt-time");
+
+                times.getChildren().add(t);
+            }
+
+            blocks.setMaxWidth(Region.USE_PREF_SIZE);
+
+            times.setPrefWidth(position);
+
+            times.setMaxWidth(position);
+
+            container.getChildren().addAll(blocks, times);
+
+            container.setAlignment(Pos.CENTER);
+
+            ganttBox.setAlignment(Pos.CENTER);
+
+            ganttBox.getChildren().add(container);
         }
 
-        Pane times = new Pane();
-        times.setPrefHeight(30);
 
-        int currentTime = processes[0].getArrivaltime();
-        int position = 0;
+    @FXML
+    public void goToInput(ActionEvent e) throws IOException {
 
-
-        Label start = new Label(String.valueOf(currentTime));
-
-        start.setLayoutX(0);
-        start.setLayoutY(0);
-
-        start.getStyleClass().add("gantt-time");
-
-        times.getChildren().add(start);
-        for (process p : processes) {
-
-            int width = p.getBursttime() * scale;
-
-            position += width;
-            currentTime += p.getBursttime();
-
-            Label t = new Label(String.valueOf(currentTime));
-
-            t.setLayoutX(position - 5);
-            t.setLayoutY(0);
-
-            t.getStyleClass().add("gantt-time");
-
-            times.getChildren().add(t);
-        }
-
-        blocks.setMaxWidth(Region.USE_PREF_SIZE);
-
-        times.setPrefWidth(position);
-        times.setMaxWidth(position);
-
-        container.setAlignment(Pos.CENTER);
-
-        container.getChildren().addAll(blocks, times);
-
-        ganttBox.setAlignment(Pos.CENTER);
-        ganttBox.getChildren().add(container);
+        SceneSwitcher.getInstance().switchToInputScene(e);
     }
 
 
-     @FXML public void goToInput(javafx.event.ActionEvent e)throws  java.io.IOException{
-         SceneSwitcher.getInstance().switchToInputScene(e);
-     }
-    @FXML public void goToRR(ActionEvent e)throws  IOException{
+    @FXML
+    public void goToRR(ActionEvent e) throws IOException {
+
         if (SceneSwitcher.getInstance().getQuantum() <= 0) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
 
             alert.setTitle("Warning");
+
             alert.setHeaderText("Missing Quantum");
+
             alert.setContentText("Please enter Quantum first!");
 
             alert.getDialogPane().getStylesheets().add(
@@ -193,15 +214,22 @@ private void fillTable(process[]processes){
 
             return;
         }
-         SceneSwitcher.getInstance().switchToRRScene(e);
+
+        SceneSwitcher.getInstance().switchToRRScene(e);
     }
-    @FXML public void goToComparison(javafx.event.ActionEvent e)throws  java.io.IOException{
+
+
+    @FXML
+    public void goToComparison(ActionEvent e) throws IOException {
+
         if (SceneSwitcher.getInstance().getQuantum() <= 0) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
 
             alert.setTitle("Warning");
+
             alert.setHeaderText("Missing Quantum");
+
             alert.setContentText("Please enter Quantum first!");
 
             alert.getDialogPane().getStylesheets().add(
@@ -217,7 +245,4 @@ private void fillTable(process[]processes){
 
         SceneSwitcher.getInstance().switchToComparisonScene(e);
     }
-
 }
-
-
