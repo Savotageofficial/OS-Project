@@ -23,7 +23,7 @@
             </Label>
             <Label text="Set random values"
                    onMouseClicked="#setRandomValues"
-                   style="-fx-text-fill: #3b82f6; -fx-font-size: 11px;">
+                   style="-fx-text-fill: #3b5097; -fx-font-weight:bold ; -fx-font-size: 10; " >
                <VBox.margin>
                   <Insets top="-2.0" left="5.0" bottom="-8" right="-60"/>
                </VBox.margin>
@@ -87,7 +87,11 @@
          <BorderPane.margin>
             <Insets right="60.0" top="-3.0" />
          </BorderPane.margin>
-         <Button text="Load Data" onAction="#loadDataAction"/>
+         <HBox spacing="5">
+            <Button styleClass="sl" text="Save Data" onAction="#saveData"/>
+            <Button styleClass="sl"  text="Load Data" onAction="#loadDataAction"/>
+         </HBox>
+
       </VBox>
    </right>
    <top>

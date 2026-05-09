@@ -49,6 +49,16 @@
 .run-btn:hover {
     -fx-background-color: #bfdbfe;
 }
+.run-btn {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-background-radius: 12;
+    -fx-font-weight: bold;
+}
+
+.run-btn:hover {
+    -fx-background-color: #bfdbfe;
+}
 
 .table-view {
     -fx-background-color: #ffffff;
@@ -113,4 +123,15 @@
     -fx-text-fill: #ef4444;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
+}
+.sl {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #3b5097;
+    -fx-background-radius: 20;
+    -fx-font-size: 10;
+    -fx-font-weight: bold;
+}
+
+.sl:hover {
+    -fx-background-color: #bfdbfe;
 }
