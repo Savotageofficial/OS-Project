@@ -88,7 +88,7 @@ public class SceneSwitcher {
         scene = new Scene(root);
         ComparisonController c = loader.getController();
         c.setData(processes);
-        scene.getStylesheets().add(SceneSwitcher.class.getResource("ComStyle.css").toExternalForm());
+        scene.getStylesheets().add(SceneSwitcher.class.getResource("table.css").toExternalForm());
         stage.setWidth(680);
         stage.setHeight(500);
         stage.setScene(scene);
