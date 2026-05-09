@@ -6,13 +6,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.stage.FileChooser;
 
 public class InputController implements Initializable {
 
@@ -42,8 +43,9 @@ public class InputController implements Initializable {
         L3.setText("");
         L4.setText("");
     }
+
     ObservableList<process> processes = FXCollections.observableArrayList();
-    int x=0;
+
     public process createProcess() {
        resetError();
         try {
@@ -72,7 +74,6 @@ public class InputController implements Initializable {
         processid.setText(String.valueOf(initialId));
         if (p == null) return;
         processes.add(p);
-        System.out.println("Added process: " + p.pid());
         arrival.clear();
         burst.clear();
     }
@@ -100,7 +101,6 @@ public class InputController implements Initializable {
         arrival.setText(String.valueOf(arr));
         burst.setText(String.valueOf(bur));
     }
-    SceneSwitcher s = SceneSwitcher.getInstance();
 
     public void goToRR(ActionEvent e) throws IOException {
         try {
@@ -172,7 +172,58 @@ public class InputController implements Initializable {
             quantum.setText(String.valueOf(q));
         }
     }
+    public void saveData() {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save File");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+            File file = fileChooser.showSaveDialog(table.getScene().getWindow());
+            if (file == null) return;
+            FileWriter writer = new FileWriter(file);
+            for (process p : processes) {
+                writer.write(p.pid() + "," + p.getArrivaltime() + "," + p.getBursttime() + "\n");
+            }
+            writer.close();
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("Data saved successfully!");
+            a.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void loadDataFromFile(File file) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            processes.clear();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0]);
+                int arr = Integer.parseInt(parts[1]);
+                int bur = Integer.parseInt(parts[2]);
+                processes.add(new process(id, arr, bur));
+            }
+            reader.close();
+            initialId = processes.size() + 1;
+            processid.setText(String.valueOf(initialId));
+
+            table.setItems(processes);
+            table.refresh();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void loadDataAction() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+        File file = fileChooser.showOpenDialog(table.getScene().getWindow());
+        if (file != null) {
+            loadDataFromFile(file);
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         processid.setText(String.valueOf(initialId));
@@ -182,4 +233,5 @@ public class InputController implements Initializable {
         table.setItems(processes);
         table.refresh();
     }
+
 }

@@ -13,9 +13,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+    private InputController controller;
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("input.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("input.fxml"));
+        Parent root = loader.load();
+        controller = loader.getController();
         Scene scene = new Scene(root);
         Image icon= new Image("OIP.png");
         stage.getIcons().add(icon);
