@@ -1,16 +1,16 @@
-package com.example.osproject;
+package com.example.osproject.Models;
 
 public class process {
-    int pid;
-    int arrivaltime;
-    int bursttime;
-    int remainingtime;
-    int waitingtime;
-    int turnaroundtime;
-    int completiontime;
-    int responsetime;
-    boolean started;
-    boolean completed;
+    public int pid;
+    public int arrivaltime;
+    public int bursttime;
+    public int remainingtime;
+    public int waitingtime;
+    public int turnaroundtime;
+    public int completiontime;
+    public int responsetime;
+    public boolean started;
+    public boolean completed;
 
     public process(int pid, int arrivaltime, int bursttime) {
         this.pid = pid;
@@ -37,6 +37,10 @@ public class process {
     }
 
     public int pid(){
+        return pid;
+    }
+
+    public int getPid() {
         return pid;
     }
     public int getArrivaltime(){

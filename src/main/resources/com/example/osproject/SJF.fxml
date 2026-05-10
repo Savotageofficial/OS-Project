@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="Anchor1" prefHeight="500.0" prefWidth="680.0" stylesheets="/com/example/osproject/SJFStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.SJFController">
+
+    <children>
+
+        <Label layoutX="35.0" layoutY="15.0" styleClass="tag" text="SJF">
+
+            <font>
+                <Font size="28.0" />
+            </font>
+
+        </Label>
+        <AnchorPane layoutY="70.0" prefHeight="120.0" prefWidth="680.0">
+
+            <children>
+
+                <Label layoutX="276.0" text="Gantt Chart" textFill="#1d4ed8">
+
+                    <font>
+                        <Font name="Century Schoolbook Italic" size="25.0" />
+                    </font>
+
+                </Label>
+
+                <HBox alignment="CENTER" layoutY="40.0" prefHeight="80.0" prefWidth="680.0">
+
+                    <children>
+
+                        <VBox fx:id="ganttBox" alignment="CENTER" prefHeight="80.0" prefWidth="620.0" />
+                    </children>
+
+                </HBox>
+
+            </children>
+
+        </AnchorPane>
+
+        <AnchorPane layoutY="190.0" prefHeight="260.0" prefWidth="680.0">
+
+            <children>
+
+                <VBox layoutX="40.0" prefHeight="260.0" prefWidth="600.0" spacing="8">
+
+                    <children>
+
+                        <TableView fx:id="table" maxHeight="210.0" prefHeight="210.0" prefWidth="600.0">
+
+                            <columns>
+
+                                <TableColumn fx:id="pidCol" text="PID" />
+                                <TableColumn fx:id="wtCol" text="WT" />
+                                <TableColumn fx:id="tatCol" text="TAT" />
+                                <TableColumn fx:id="rtCol" text="RT" />
+
+                            </columns>
+
+                        </TableView>
+
+                        <HBox alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" spacing="35">
+
+                            <children>
+
+                                <Label fx:id="avgWT" text="Average WT: -" />
+
+                                <Label fx:id="avgTAT" text="Average TAT: -" />
+
+                                <Label fx:id="avgRT" text="Average RT: -" />
+
+                            </children>
+
+                        </HBox>
+
+                    </children>
+
+                </VBox>
+
+            </children>
+
+        </AnchorPane>
+
+        <Button layoutX="470.0" layoutY="20.0" onAction="#goToInput" styleClass="nav-btn" text="Input" />
+
+        <Button layoutX="540.0" layoutY="20.0" onAction="#goToRR" styleClass="nav-btn" text="RR" />
+
+        <Button layoutX="590.0" layoutY="20.0" onAction="#goToComparison" prefWidth="80.0" styleClass="nav-btn" text="CT&amp;RQ" />
+
+    </children>
+
+</AnchorPane>

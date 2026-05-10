@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500" prefWidth="680" stylesheets="@table.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osproject.ComparisonController">
+
+    <children>
+
+        <Button layoutX="300.0" layoutY="219.0" mnemonicParsing="false" onAction="#result" text="Compare" />
+        <Button fx:id="bac" layoutX="606.0" layoutY="18.0" mnemonicParsing="false" onAction="#goToInput" text="Input" />
+        <Button fx:id="rb" layoutX="461.0" layoutY="18.0" mnemonicParsing="false" onAction="#goToRR" prefHeight="28.0" prefWidth="59.0" text="RR" />
+        <Button fx:id="sb" layoutX="535.0" layoutY="18.0" mnemonicParsing="false" onAction="#goToSJF" prefHeight="28.0" prefWidth="59.0" text="SJF" />
+
+        <TableView fx:id="table" layoutX="159.0" layoutY="53.0" prefHeight="151.0" prefWidth="360">
+
+            <columns>
+                <TableColumn fx:id="met" prefWidth="120" text="Metric" />
+                <TableColumn fx:id="rr" prefWidth="120" text="RR" />
+                <TableColumn fx:id="sjf" prefWidth="120" text="SRTF" />
+            </columns>
+
+        </TableView>
+        <HBox fx:id="rq" alignment="CENTER" layoutX="160.0" layoutY="301.0" prefHeight="60" prefWidth="360" spacing="5">
+        </HBox>
+        <Label fx:id="arrow1" layoutX="97.0" layoutY="290.0" prefHeight="82.0" prefWidth="60.0" text="⬅" />
+        <Label fx:id="arrow2" layoutX="523.0" layoutY="290.0" prefHeight="82.0" prefWidth="60.0" text="⬅" />
+
+        <Label fx:id="ti" alignment="CENTER" contentDisplay="CENTER" layoutX="199.0" layoutY="273.0" prefHeight="18.0" prefWidth="277.0" text="Round Robin Ready Queue" textAlignment="CENTER">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <HBox layoutX="190.0" layoutY="368.0" prefHeight="34.0" prefWidth="297.0">
+            <children>
+                <Button fx:id="pr" mnemonicParsing="false" onAction="#prev" prefHeight="34.0" prefWidth="70.0" text="◀ Prev" />
+                <Label fx:id="time" alignment="CENTER" prefHeight="34.0" prefWidth="130.0" style="-fx-background-color: white;" text="T=0" />
+                <Button fx:id="ne" mnemonicParsing="false" onAction="#next" prefHeight="34.0" prefWidth="79.0" text="Next ▶" />
+            </children>
+        </HBox>
+
+
+        <StackPane fx:id="overlay" alignment="CENTER" layoutX="158.0" layoutY="96.0" prefHeight="302.0" prefWidth="360.0" visible="false">
+
+            <children>
+
+                <VBox fx:id="popup" alignment="CENTER" prefHeight="100" prefWidth="100" spacing="10">
+
+
+
+                    <Label fx:id="resultt" alignment="CENTER" maxWidth="200" textAlignment="CENTER" wrapText="true" />
+
+                    <Button fx:id="close" onAction="#closeOverlay" text="Close" />
+
+                </VBox>
+
+            </children>
+
+        </StackPane>
+
+
+
+
+
+    </children>
+
+</AnchorPane>

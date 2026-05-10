@@ -1,13 +1,21 @@
-package com.example.osproject;
+package com.example.osproject.Algorithms;
+
+import com.example.osproject.Models.process;
 
 import java.util.*;
 
 public class RR {
     int Processcount, quantum;
     int[] processes;
+    private List<process> executionOrder = new ArrayList<>();
+    private HashMap<Integer, Integer> executionDurations = new HashMap<>();
+    private HashMap<Integer, process> executionTimeline = new HashMap<>();
 
-    public static void RR(process[] processes, int q) {
+    public void RR(process[] processes, int q, HashMap<Integer, Queue> RQs) {
         int n = processes.length;
+        executionOrder.clear();
+        executionDurations.clear();
+        executionTimeline.clear();
 
         // See What java gonna compare between objects
         Arrays.sort(processes, Comparator.comparingInt(p -> p.arrivaltime));
@@ -28,11 +36,25 @@ public class RR {
         while (completed < n) {
             while (!(ready.isEmpty())) {
 
+                Queue<Integer> snapshot = new LinkedList<>();
+                for (process rp : ready) {
+                    snapshot.add(rp.pid());
+                }
+                RQs.put(time, snapshot);
+
                 process p = ready.poll();
+
+                if (!p.started) {
+                    p.responsetime = time - p.arrivaltime;
+                    p.started = true;
+                }
                 // Checking the ready
                 if (p.remainingtime > q) {
                     // execute the process completely in its time quantum
                     p.remainingtime -= q;
+                    executionOrder.add(p);
+                    executionTimeline.put(time, p);
+                    executionDurations.put(time, q);
                     time += q;
                     // check what processes arrived , aka what processes have arrival time = time
                     // and add them to arrived
@@ -46,6 +68,9 @@ public class RR {
                     ready.add(p);
                 } else if (p.remainingtime <= q) {
                     // execute p for its remaining time
+                    executionOrder.add(p);
+                    executionTimeline.put(time, p);
+                    executionDurations.put(time, p.remainingtime);
                     time += p.remainingtime;
                     p.completiontime = time;
                     p.turnaroundtime = time - p.arrivaltime;
@@ -77,8 +102,17 @@ public class RR {
             }
         }
 
+    }
 
+    public HashMap<Integer, Integer> getExecutionDurations() {
+        return executionDurations;
+    }
 
+    public HashMap<Integer, process> getExecutionTimeline() {
+        return executionTimeline;
+    }
+    public List<process> getExecutionOrder() {
+        return executionOrder;
     }
 
 }
