@@ -1,4 +1,6 @@
-package com.example.osproject;
+package com.example.osproject.Algorithms;
+
+import com.example.osproject.Models.process;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +12,7 @@ public class SJF {
     process[] processes;
     private double TotalWaitTime = 0;
     private double TotalTurnaroundTime = 0;
+    private List <process> executionOrder = new ArrayList<>();
 
     public SJF(List<process> p) {
         process[] p_array = p.toArray(new process[p.size()]);
@@ -19,8 +22,21 @@ public class SJF {
     public SJF(process[] processes) {
         this.processes = processes;
     }
+    public void reset(){
+        this.TotalWaitTime = 0;
+        this.TotalTurnaroundTime = 0;
+        //idea : remove pointer/reference from the old arraylist and let the garbage collector do its thing
+        this.executionOrder = null;
+        //then reassign the reference to a new arraylist
+        this.executionOrder = new ArrayList<>();
+    }
 
-    public void Run(process[] processes){
+    public void Run(){
+        for (process p : processes) {
+            p.reset();
+        }
+
+
         int n = processes.length;
 
         Arrays.sort(processes , Comparator.comparingInt(p -> p.arrivaltime));
@@ -38,6 +54,13 @@ public class SJF {
                 }
             }
             if (idx != -1){
+                // Track response time (first time on CPU)
+                if (!processes[idx].started) {
+                    processes[idx].responsetime = currentTime - processes[idx].arrivaltime;
+                    processes[idx].started = true;
+                    executionOrder.add(processes[idx]);
+                }
+
                 processes[idx].remainingtime--;
                 currentTime++;
 
@@ -56,8 +79,8 @@ public class SJF {
             total_waiting_time += p.waitingtime;
             total_turnaround_time += p.turnaroundtime;
 
-            // use this for the actual table ↓↓↓
-            System.out.println("p" + p.pid + " Completion Time:" + p.completiontime + " Waiting Time:" + p.waitingtime + " Turnaround Time:" + p.turnaroundtime);
+
+
         }
 
         this.TotalWaitTime = total_waiting_time;

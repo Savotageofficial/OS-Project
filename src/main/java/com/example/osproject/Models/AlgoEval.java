@@ -1,0 +1,145 @@
+package com.example.osproject.Models;
+
+import com.example.osproject.Algorithms.RR;
+import com.example.osproject.Algorithms.SJF;
+
+import java.util.*;
+
+public class AlgoEval {
+
+    private process[] rrProcesses;
+    private process[] srtfProcesses;
+    private int quantum;
+
+    // Averages for RR
+    private double rrAvgWT, rrAvgTAT, rrAvgRT;
+    // Averages for SRTF
+    private double srtfAvgWT, srtfAvgTAT, srtfAvgRT;
+    private HashMap<Integer, Queue> rrReadyQueues;
+
+    public AlgoEval(List<process> originalProcesses, int quantum) {
+        this.quantum = quantum;
+
+        rrProcesses = copyList(originalProcesses);
+        srtfProcesses = copyList(originalProcesses);
+
+        // Run both algorithms using the existing classes
+        RR rrRunner = new RR();
+        rrReadyQueues = new HashMap<>();
+        rrRunner.RR(rrProcesses, quantum, rrReadyQueues);
+        SJF sjf = new SJF(srtfProcesses);
+        sjf.Run();
+
+        // Calculate averages
+        rrAvgWT = avgWT(rrProcesses);
+        rrAvgTAT = avgTAT(rrProcesses);
+        rrAvgRT = avgRT(rrProcesses);
+
+        srtfAvgWT = avgWT(srtfProcesses);
+        srtfAvgTAT = avgTAT(srtfProcesses);
+        srtfAvgRT = avgRT(srtfProcesses);
+    }
+
+    // Averages calculators
+
+    private double avgWT(process[] procs) {
+        double sum = 0;
+        for (process p : procs)
+            sum += p.waitingtime;
+        return sum / procs.length;
+    }
+
+    private double avgTAT(process[] procs) {
+        double sum = 0;
+        for (process p : procs)
+            sum += p.turnaroundtime;
+        return sum / procs.length;
+    }
+
+    private double avgRT(process[] procs) {
+        double sum = 0;
+        for (process p : procs)
+            sum += p.responsetime;
+        return sum / procs.length;
+    }
+
+    public String getComparisonSummary() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Metric |  RR  | SRTF" + "\n\n\n");
+        sb.append("Avg Waiting Time= " + rrAvgWT + " | " + srtfAvgWT + "\n\n\n");
+        sb.append("Avg Turnaround Time= " + rrAvgTAT + " | " + srtfAvgTAT + "\n\n\n");
+        sb.append("Avg Response Time= " + rrAvgRT + " | " + srtfAvgRT + "\n\n\n");
+        return sb.toString();
+    }
+
+    public String getConclusion() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(rrAvgWT < srtfAvgWT ? "Lower Avg WT:  Round Robin\n\n\n"
+                : srtfAvgWT < rrAvgWT ? "Lower Avg WT:  SRTF\n\n\n"
+                : "Avg WT:        Tied\n\n\n");
+
+        sb.append(rrAvgTAT < srtfAvgTAT ? "Lower Avg TAT: Round Robin\n\n\n"
+                : srtfAvgTAT < rrAvgTAT ? "Lower Avg TAT: SRTF\n\n\n"
+                : "Avg TAT:       Tied\n\n\n");
+
+        sb.append(rrAvgRT < srtfAvgRT ? "Lower Avg RT:  Round Robin\n"
+                : srtfAvgRT < rrAvgRT ? "Lower Avg RT:  SRTF\n\n\n"
+                : "Avg RT:        Tied\n\n\n");
+
+        if ((rrAvgWT + rrAvgTAT + rrAvgRT) < (srtfAvgWT + srtfAvgTAT + srtfAvgRT)) {
+            sb.append("RR is better\n\n\n");
+        } else if ((rrAvgWT + rrAvgTAT + rrAvgRT) > (srtfAvgWT + srtfAvgTAT + srtfAvgRT)) {
+            sb.append("SRTF is better\n\n\n");
+        } else {
+            sb.append("Both are equally good.\n\n\n");
+        }
+
+        return sb.toString();
+    }
+
+    private process[] copyList(List<process> list) {
+        process[] arr = new process[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            arr[i] = list.get(i).copy();
+        }
+        return arr;
+    }
+
+    public process[] getRrProcesses() {
+        return rrProcesses;
+    }
+
+    public process[] getSrtfProcesses() {
+        return srtfProcesses;
+    }
+
+    public double getRrAvgWT() {
+        return rrAvgWT;
+    }
+
+    public double getRrAvgTAT() {
+        return rrAvgTAT;
+    }
+
+    public double getRrAvgRT() {
+        return rrAvgRT;
+    }
+
+    public double getSrtfAvgWT() {
+        return srtfAvgWT;
+    }
+
+    public double getSrtfAvgTAT() {
+        return srtfAvgTAT;
+    }
+
+    public double getSrtfAvgRT() {
+        return srtfAvgRT;
+    }
+
+    public HashMap<Integer, Queue> getRrReadyQueues() {
+        return rrReadyQueues;
+    }
+
+}

@@ -1,0 +1,27 @@
+.dialog-pane {
+    -fx-background-color: #f8fafc;
+}
+.dialog-pane .header-panel {
+    -fx-background-color: #f8fafc;
+    -fx-height:400;
+}
+.dialog-pane .label {
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 16px;
+}
+#yesBtn{
+    -fx-background-color: #5B8DEF;
+    -fx-text-fill: white;
+    -fx-background-radius: 15;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+#dontSaveBtn, #cancelBtn{
+    -fx-background-color: white;
+    -fx-text-fill: #1d4ed8;
+    -fx-border-color: #5B8DEF;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
