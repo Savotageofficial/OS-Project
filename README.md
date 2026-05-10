@@ -18,14 +18,14 @@ A JavaFX desktop application that simulates and compares classic **CPU schedulin
 
 | Name | GitHub |
 |------|--------|
-| Ahmed Mohamed | — |
-| Mohamed Safwat | — |
-| Adham Mohamed | — |
-| Abdelrahman Ahmed | — |
-| Asmaa Saad | — |
-| Tasneem Kadry | — |
-| Jana Kareem | — |
-| Mennat Allah Mahmoud | — |
+| Ahmed Mohamed | https://github.com/3bsalam6 |
+| Mohamed Safwat | https://github.com/Savotageofficial |
+| Adham Mohamed | https://github.com/adham0gad |
+| Abdelrahman Ahmed | https://github.com/abdoahmed98710 |
+| Asmaa Saad | https://github.com/Asmaa1167 |
+| Tasneem Kadry | https://github.com/T-oso |
+| Jana Kareem | https://github.com/janapola115-oss |
+| Mennat Allah Mahmoud | https://github.com/XXMennahMahmoudXX |
 
 ---
 
@@ -36,12 +36,8 @@ A JavaFX desktop application that simulates and compares classic **CPU schedulin
 - Results are displayed side-by-side so you can immediately see which algorithm performs best for your workload.
 
 ### **Supported Scheduling Algorithms**
-- **FCFS** — First Come, First Served (non-preemptive)
-- **SJF** — Shortest Job First (non-preemptive)
 - **SRTF** — Shortest Remaining Time First (preemptive)
 - **Round Robin** — with configurable time quantum
-- **Priority Scheduling** — non-preemptive, with user-defined priorities
-- **Preemptive Priority Scheduling** — priority-based with preemption
 
 ### **JavaFX User Interface**
 - Clean, interactive GUI built with JavaFX 17.
@@ -101,8 +97,8 @@ java --module-path /path/to/javafx-sdk-17.0.10/lib \
 ## **How to Use**
 
 1. **Add Processes** — Enter each process's arrival time, burst time, and (optionally) priority using the input form.
-2. **Select an Algorithm** — Choose one or more scheduling algorithms from the dropdown or checkbox list.
-3. **Set Time Quantum** — If Round Robin is selected, enter your desired time quantum.
+2. **Set Time Quantum** — If Round Robin is selected, enter your desired time quantum.
+3. **Select an Algorithm** — Choose one or more scheduling algorithms from the dropdown or checkbox list.
 4. **Run Simulation** — Click **Compare** to simulate all selected algorithms.
 5. **View Results** — The Gantt chart and metrics table will update with average waiting, turnaround, and response times for each algorithm.
 
@@ -115,11 +111,11 @@ OS-Project/
 ├── src/
 │   ├── algorithms/       # Scheduling algorithm implementations
 │   ├── model/            # Process and simulation data models
-│   ├── controller/       # JavaFX controllers
-│   ├── view/             # FXML layout files
+|   ├── ..../             # Controllers
 │   └── Main.java         # Application entry point
 ├── resources/
-│   └── styles/           # CSS stylesheets
+│   └── com.example.osproject/           # CSS stylesheets and FXML VIEWS
+|         
 └── README.md
 ```
 
