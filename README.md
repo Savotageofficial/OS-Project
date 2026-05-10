@@ -96,9 +96,9 @@ java --module-path /path/to/javafx-sdk-17.0.10/lib \
 
 ## **How to Use**
 
-1. **Add Processes** — Enter each process's arrival time, burst time, and (optionally) priority using the input form.
-2. **Set Time Quantum** — If Round Robin is selected, enter your desired time quantum.
-3. **Select an Algorithm** — Choose one or more scheduling algorithms from the dropdown or checkbox list.
+1. **Add Processes** — Enter each process's arrival time, burst time.
+2. **Set Time Quantum** — enter your desired time quantum.
+3. **Select an Algorithm** — Choose one scheduling algorithms from the Provided
 4. **Run Simulation** — Click **Compare** to simulate all selected algorithms.
 5. **View Results** — The Gantt chart and metrics table will update with average waiting, turnaround, and response times for each algorithm.
 
