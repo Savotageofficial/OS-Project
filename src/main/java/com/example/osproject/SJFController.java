@@ -13,7 +13,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.control.ContentDisplay;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 public class  SJFController {
     @FXML private TableView<process> table;
@@ -64,7 +64,7 @@ public class  SJFController {
         process[] result = sjf.getProcesses();
         fillTable(result);
         calculateAverages(result);
-        drawGanttChart(result);
+        drawGanttChart(sjf);
     }
 private void fillTable(process[]processes){
         ObservableList<process>data =FXCollections.observableArrayList();
@@ -94,9 +94,11 @@ private void fillTable(process[]processes){
          avgTAT.setText("Average TAT= " + totalTAT + "/" + n + "=" + String.format ("%.3f",totalTAT / n));
          avgRT.setText("Average RT= " + totalRT + "/" + n + "=" +  String.format("%.3f",totalRT / n));
      }
-    private void drawGanttChart(process[] processes) {
+    private void drawGanttChart(SJF sjf) {
+        process[] processes =sjf.getProcesses();
 
-
+        HashMap<Integer , process> executuions = sjf.getExecutions();
+        System.out.println(sjf.getExecutions());
             ganttBox.getChildren().clear();
 
             VBox container = new VBox(5);
@@ -107,10 +109,19 @@ private void fillTable(process[]processes){
 
             int scale = 15;
             int minimumWidth = 35;
+            HashMap<Integer , process> executions = sjf.getExecutions();
+            int endTime = Arrays.stream(processes).mapToInt(p -> p.completiontime).max().getAsInt();
 
-            for (process p : processes) {
+            List<Integer> sortedKeys = new ArrayList<>(executions.keySet());
 
-                int width = Math.max(p.getBursttime() * scale, minimumWidth);
+            for (int i = 0; i < sortedKeys.size(); i++) {
+                int time = sortedKeys.get(i);
+                process p = executions.get(time);
+
+                int nextTime = (i + 1 < sortedKeys.size()) ? sortedKeys.get(i + 1) : endTime;
+                int duration = nextTime - time;
+
+                int width = Math.max(duration * scale, minimumWidth);
 
                 Label block = new Label("P" + p.pid());
 
@@ -135,7 +146,7 @@ private void fillTable(process[]processes){
 
             times.setPrefHeight(30);
 
-            int currentTime = processes[0].getArrivaltime();
+            int currentTime = sortedKeys.get(0);
 
             int position = 0;
 
@@ -149,15 +160,16 @@ private void fillTable(process[]processes){
 
             times.getChildren().add(start);
 
-            for (process p : processes) {
+            for (int i = 1; i < sortedKeys.size(); i++) {
+                int time = sortedKeys.get(i);
+                process p = executions.get(time);
 
                 int width = Math.max(p.getBursttime() * scale, minimumWidth);
 
                 position += width;
 
-                currentTime += p.getBursttime();
 
-                Label t = new Label(String.valueOf(currentTime));
+                Label t = new Label(String.valueOf(time));
 
                 t.setLayoutX(position - 12);
 
@@ -167,6 +179,28 @@ private void fillTable(process[]processes){
 
                 times.getChildren().add(t);
             }
+            // since the last process wont appear in the loop , add it myself
+            int time = sortedKeys.get(sortedKeys.size() - 1);
+            process p = executions.get(time);
+            time = p.completiontime;
+
+            int width = Math.max(p.getBursttime() * scale, minimumWidth);
+
+            position += width;
+
+
+            Label t = new Label(String.valueOf(time));
+
+            t.setLayoutX(position - 12);
+
+            t.setLayoutY(0);
+
+            t.getStyleClass().add("gantt-time");
+
+            times.getChildren().add(t);
+
+
+            //--------
 
             blocks.setMaxWidth(Region.USE_PREF_SIZE);
 

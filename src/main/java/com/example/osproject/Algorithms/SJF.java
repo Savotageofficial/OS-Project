@@ -2,10 +2,7 @@ package com.example.osproject.Algorithms;
 
 import com.example.osproject.Models.process;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class SJF {
 
@@ -13,7 +10,7 @@ public class SJF {
     private double TotalWaitTime = 0;
     private double TotalTurnaroundTime = 0;
     private List <process> executionOrder = new ArrayList<>();
-
+    private HashMap<Integer , process> executions = new HashMap<>();
     public SJF(List<process> p) {
         process[] p_array = p.toArray(new process[p.size()]);
         this.processes = p_array;
@@ -29,6 +26,7 @@ public class SJF {
         this.executionOrder = null;
         //then reassign the reference to a new arraylist
         this.executionOrder = new ArrayList<>();
+        this.executions = null;
     }
 
     public void Run(){
@@ -62,6 +60,7 @@ public class SJF {
                 }
 
                 processes[idx].remainingtime--;
+                executions.put(currentTime , processes[idx]);
                 currentTime++;
 
                 if(processes[idx].remainingtime == 0){
@@ -98,5 +97,23 @@ public class SJF {
 
     public double getTotalTurnaroundTime() {
         return TotalTurnaroundTime;
+    }
+
+    public HashMap<Integer, process> getExecutions() {
+        LinkedHashMap<Integer, process> result = new LinkedHashMap<>();
+        process lastProcess = null;
+
+        List<Integer> sortedKeys = new ArrayList<>(executions.keySet());
+        Collections.sort(sortedKeys);
+
+        for (int key : sortedKeys) {
+            process current = executions.get(key);
+            if (current != lastProcess) {
+                result.put(key, current);
+                lastProcess = current;
+            }
+        }
+
+        return result; // added (replaced old return statement)
     }
 }
